@@ -4,7 +4,7 @@ const recipes = [
         id: 1,
         title: "Ultra-Detailed Cinnamon Rolls (Overnight Tangzhong Method)",
         description: "Perfect for teens – fluffy overnight cinnamon rolls using the tangzhong method for extra soft texture.",
-        image: "https://via.placeholder.com/400x250/ff6b6b/ffffff?text=Cinnamon+Rolls",
+        image: "images/cinnamon-rolls.jpg",
         time: "Overnight + 3 hours",
         difficulty: "Medium",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
@@ -40,7 +40,7 @@ const recipes = [
         id: 2,
         title: "Homemade Focaccia Bread",
         description: "Crispy outside, fluffy inside Italian focaccia bread with olive oil and herbs.",
-        image: "https://via.placeholder.com/400x250/4ecdc4/ffffff?text=Focaccia+Bread",
+        image: "images/focaccia-bread.jpg",
         time: "2 hours",
         difficulty: "Easy",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
@@ -65,7 +65,7 @@ const recipes = [
         id: 3,
         title: "Classic Butter Scones",
         description: "Tender, flaky British-style scones perfect for afternoon tea or breakfast.",
-        image: "https://via.placeholder.com/400x250/45b7d1/ffffff?text=Butter+Scones",
+        image: "images/butter-scones.jpg",
         time: "30 mins",
         difficulty: "Easy",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
@@ -91,7 +91,7 @@ const recipes = [
         id: 4,
         title: "Apple Crisp",
         description: "Classic dessert with tender spiced apples topped with a buttery oat crumble.",
-        image: "https://via.placeholder.com/400x250/f39c12/ffffff?text=Apple+Crisp",
+        image: "images/apple-crisp.jpg",
         time: "1 hour",
         difficulty: "Easy",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
@@ -118,7 +118,7 @@ const recipes = [
         id: 5,
         title: "Creamy Vanilla Fudge",
         description: "Rich, smooth vanilla fudge that melts in your mouth – perfect for gifts!",
-        image: "https://via.placeholder.com/400x250/9b59b6/ffffff?text=Vanilla+Fudge",
+        image: "images/vanilla-fudge.jpg",
         time: "30 mins + cooling",
         difficulty: "Medium",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
@@ -142,7 +142,7 @@ const recipes = [
         id: 6,
         title: "Rich Chocolate Fudge",
         description: "Decadently smooth chocolate fudge made with just three simple ingredients.",
-        image: "https://via.placeholder.com/400x250/8b4513/ffffff?text=Chocolate+Fudge",
+        image: "images/chocolate-fudge.jpg",
         time: "15 mins + chilling",
         difficulty: "Easy",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
