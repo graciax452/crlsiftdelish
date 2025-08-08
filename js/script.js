@@ -1,91 +1,163 @@
-// Sample recipe data - Replace with your actual recipes
+// Recipe collection - Replace placeholder images and YouTube IDs with your actual content
 const recipes = [
     {
         id: 1,
-        title: "Classic Chocolate Chip Cookies",
-        description: "Soft, chewy chocolate chip cookies that are perfect for any occasion.",
-        image: "https://via.placeholder.com/400x250/ff6b6b/ffffff?text=Chocolate+Chip+Cookies",
-        time: "30 mins",
-        difficulty: "Easy",
+        title: "Ultra-Detailed Cinnamon Rolls (Overnight Tangzhong Method)",
+        description: "Perfect for teens – fluffy overnight cinnamon rolls using the tangzhong method for extra soft texture.",
+        image: "https://via.placeholder.com/400x250/ff6b6b/ffffff?text=Cinnamon+Rolls",
+        time: "Overnight + 3 hours",
+        difficulty: "Medium",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
         ingredients: [
-            "2¼ cups all-purpose flour",
-            "1 tsp baking soda",
-            "1 tsp salt",
-            "1 cup butter, softened",
-            "¾ cup granulated sugar",
-            "¾ cup brown sugar",
-            "2 large eggs",
-            "2 tsp vanilla extract",
-            "2 cups chocolate chips"
+            "25g flour (for tangzhong)",
+            "120g milk (for tangzhong)",
+            "260g flour",
+            "45g brown sugar",
+            "5g salt",
+            "5g yeast",
+            "2 eggs",
+            "5g vanilla",
+            "110g softened butter",
+            "40g melted butter (filling)",
+            "10g cinnamon",
+            "25g white sugar (filling)",
+            "45g brown sugar (filling)"
         ],
         instructions: [
-            "Preheat oven to 375°F (190°C).",
-            "Mix flour, baking soda, and salt in a bowl.",
-            "Cream butter and sugars until fluffy.",
-            "Beat in eggs and vanilla.",
-            "Gradually add flour mixture.",
-            "Stir in chocolate chips.",
-            "Drop rounded tablespoons onto ungreased cookie sheets.",
-            "Bake 9-11 minutes until golden brown.",
-            "Cool on baking sheet for 2 minutes before removing."
+            "Night before: Make tangzhong by whisking 25g flour + 120g milk, cook until thick like pudding.",
+            "Mix tangzhong with 260g flour, brown sugar, salt, yeast, eggs, and vanilla.",
+            "Add softened butter slowly, knead 8-10 mins until smooth.",
+            "First rise: Cover and refrigerate overnight (8-12 hours).",
+            "Make filling: Mix melted butter, cinnamon, and both sugars into a paste.",
+            "Next morning: Roll dough into 30x40cm rectangle.",
+            "Spread filling, roll tightly from long side, cut into 8 pieces.",
+            "Second rise: Let rise 1 hour until puffy.",
+            "Bake at 180°C (350°F) for 20-25 mins until golden.",
+            "Frost while warm and enjoy!"
         ]
     },
     {
         id: 2,
-        title: "Homemade Pizza Margherita",
-        description: "Authentic Italian pizza with fresh tomatoes, mozzarella, and basil.",
-        image: "https://via.placeholder.com/400x250/4ecdc4/ffffff?text=Pizza+Margherita",
-        time: "45 mins",
-        difficulty: "Medium",
+        title: "Homemade Focaccia Bread",
+        description: "Crispy outside, fluffy inside Italian focaccia bread with olive oil and herbs.",
+        image: "https://via.placeholder.com/400x250/4ecdc4/ffffff?text=Focaccia+Bread",
+        time: "2 hours",
+        difficulty: "Easy",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
         ingredients: [
-            "1 lb pizza dough",
-            "½ cup pizza sauce",
-            "8 oz fresh mozzarella, sliced",
-            "2 tomatoes, sliced",
-            "Fresh basil leaves",
-            "2 tbsp olive oil",
-            "Salt and pepper to taste"
+            "256g flour",
+            "5g salt",
+            "4g yeast",
+            "70g olive oil",
+            "15g oil (for pan)",
+            "225g water (approx.)"
         ],
         instructions: [
-            "Preheat oven to 475°F (245°C).",
-            "Roll out pizza dough on floured surface.",
-            "Transfer to pizza stone or baking sheet.",
-            "Spread sauce evenly over dough.",
-            "Add mozzarella and tomato slices.",
-            "Drizzle with olive oil, season with salt and pepper.",
-            "Bake 12-15 minutes until crust is golden.",
-            "Add fresh basil before serving."
+            "Mix flour, salt, yeast, and water. Knead 5 minutes.",
+            "Add 35g olive oil, knead 5 more minutes until smooth.",
+            "Let rise 1 hour until doubled.",
+            "Oil a pan, stretch dough to fit.",
+            "Dimple with fingers, drizzle remaining oil on top.",
+            "Bake at 220°C (425°F) for 20-25 minutes until golden."
         ]
     },
     {
         id: 3,
-        title: "Creamy Chicken Alfredo",
-        description: "Rich and creamy pasta dish with tender chicken and homemade Alfredo sauce.",
-        image: "https://via.placeholder.com/400x250/45b7d1/ffffff?text=Chicken+Alfredo",
-        time: "25 mins",
+        title: "Classic Butter Scones",
+        description: "Tender, flaky British-style scones perfect for afternoon tea or breakfast.",
+        image: "https://via.placeholder.com/400x250/45b7d1/ffffff?text=Butter+Scones",
+        time: "30 mins",
+        difficulty: "Easy",
+        youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+        ingredients: [
+            "350g flour",
+            "50g white sugar",
+            "20g baking powder",
+            "3g salt",
+            "110g unsalted butter (cold, cubed)",
+            "225g milk",
+            "5g vanilla"
+        ],
+        instructions: [
+            "Whisk together dry ingredients in a large bowl.",
+            "Cut in cold butter until mixture resembles coarse crumbs.",
+            "Add milk and vanilla, mix gently until just combined.",
+            "Pat dough into a circle on floured surface.",
+            "Cut into 8 wedges with sharp knife.",
+            "Bake at 200°C (400°F) for 15-18 minutes until golden."
+        ]
+    },
+    {
+        id: 4,
+        title: "Apple Crisp",
+        description: "Classic dessert with tender spiced apples topped with a buttery oat crumble.",
+        image: "https://via.placeholder.com/400x250/f39c12/ffffff?text=Apple+Crisp",
+        time: "1 hour",
+        difficulty: "Easy",
+        youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+        ingredients: [
+            "1000g apples (peeled and sliced)",
+            "0.5 lemon (juiced)",
+            "105g white sugar",
+            "55g soft brown sugar",
+            "10g cinnamon",
+            "140g flour",
+            "40g rolled oats",
+            "110g unsalted butter (cold)"
+        ],
+        instructions: [
+            "Toss sliced apples with lemon juice, 55g brown sugar, and cinnamon.",
+            "Mix flour, oats, and 105g white sugar in a bowl.",
+            "Cut in cold butter until mixture is crumbly.",
+            "Layer seasoned apples in a baking dish.",
+            "Top evenly with crumb mixture.",
+            "Bake at 180°C (350°F) for 40 minutes until golden and bubbly."
+        ]
+    },
+    {
+        id: 5,
+        title: "Creamy Vanilla Fudge",
+        description: "Rich, smooth vanilla fudge that melts in your mouth – perfect for gifts!",
+        image: "https://via.placeholder.com/400x250/9b59b6/ffffff?text=Vanilla+Fudge",
+        time: "30 mins + cooling",
         difficulty: "Medium",
         youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
         ingredients: [
-            "1 lb fettuccine pasta",
-            "2 chicken breasts, sliced",
-            "½ cup butter",
-            "1 cup heavy cream",
-            "1 cup Parmesan cheese, grated",
-            "3 cloves garlic, minced",
-            "Salt and pepper to taste",
-            "Fresh parsley for garnish"
+            "450g soft brown sugar",
+            "150g milk",
+            "115g unsalted butter",
+            "1 can condensed milk (≈400g)",
+            "5g vanilla extract"
         ],
         instructions: [
-            "Cook pasta according to package directions.",
-            "Season and cook chicken until golden brown.",
-            "In same pan, melt butter and sauté garlic.",
-            "Add cream and simmer for 2 minutes.",
-            "Stir in Parmesan cheese until melted.",
-            "Add cooked pasta and chicken to sauce.",
-            "Toss until well coated.",
-            "Garnish with parsley and serve immediately."
+            "Melt butter, brown sugar, milk, and condensed milk in a heavy pan.",
+            "Bring to a boil, stirring constantly until mixture reaches 115°C (240°F).",
+            "Remove from heat and add vanilla extract.",
+            "Beat vigorously for about 5 minutes until thick and creamy.",
+            "Pour into a lined pan and let cool completely.",
+            "Cut into squares when set and enjoy!"
+        ]
+    },
+    {
+        id: 6,
+        title: "Rich Chocolate Fudge",
+        description: "Decadently smooth chocolate fudge made with just three simple ingredients.",
+        image: "https://via.placeholder.com/400x250/8b4513/ffffff?text=Chocolate+Fudge",
+        time: "15 mins + chilling",
+        difficulty: "Easy",
+        youtubeId: "dQw4w9WgXcQ", // Replace with actual YouTube video ID
+        ingredients: [
+            "340g semi-sweet chocolate chips",
+            "1 can condensed milk (≈400g)",
+            "5g vanilla extract"
+        ],
+        instructions: [
+            "Combine chocolate chips and condensed milk in a heavy saucepan.",
+            "Cook over low heat, stirring constantly until chocolate melts and mixture is smooth.",
+            "Remove from heat and stir in vanilla extract.",
+            "Pour into a parchment-lined pan and spread evenly.",
+            "Chill for at least 2 hours until firm.",
+            "Cut into squares and serve!"
         ]
     }
 ];
