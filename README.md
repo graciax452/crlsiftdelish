@@ -1,13 +1,13 @@
 # Ctrl+Shift+Delish Recipe Website
 
-A modern, responsive static website for sharing recipes with images and YouTube video links. Perfect for food bloggers and cooking enthusiasts who want to showcase their culinary creations.
+A modern, responsive static website for sharing cooking and baking recipes with images and YouTube video links. Perfect for home cooks of all skill levels who want to showcase their culinary creations with a fun, tech-inspired twist.
 
 ## Features
 
-- 🍳 **Recipe Collection**: Display recipes with images, cooking time, and difficulty levels
+- 🍳 **Recipe Collection**: Display cooking and baking recipes with images, cook time, and difficulty levels
 - 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 - 🎥 **YouTube Integration**: Link recipes to cooking video tutorials
-- 🎨 **Modern UI**: Clean, professional design with smooth animations
+- 🎨 **Modern UI**: Clean, tech-inspired design with smooth animations
 - 📋 **Detailed View**: Modal popup with ingredients and step-by-step instructions
 - 🚀 **GitHub Pages Ready**: Optimized for easy deployment to GitHub Pages
 

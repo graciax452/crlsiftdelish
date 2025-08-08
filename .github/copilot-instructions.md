@@ -18,6 +18,12 @@ This is a static recipe website built with HTML, CSS, and JavaScript for hosting
 - Keep recipe data structure consistent
 - Ensure accessibility standards are met
 
+## Content Strategy
+- Mix of baking and cooking recipes for diverse audience
+- Clear, step-by-step instructions suitable for all skill levels
+- Fun tech-inspired branding while remaining approachable
+- Focus on practical, achievable recipes for home cooks
+
 ## When adding new features:
 - Update the recipes array in js/script.js for new recipes
 - Maintain the existing card-based layout
