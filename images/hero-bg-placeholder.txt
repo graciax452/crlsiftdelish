@@ -1,0 +1,20 @@
+This is a placeholder for your hero background image.
+
+TO ADD YOUR HERO IMAGE:
+1. Find or create a high-quality image (1920x1080px or larger)
+2. Save it as "hero-bg.jpg" in this images/ folder
+3. Delete this placeholder file
+
+The CSS is already set up to use ../images/hero-bg.jpg as the background.
+
+Current setup will show:
+- Your hero image as the background
+- Gradient overlay on top for readability
+- Grid pattern overlay for the techy effect
+- All layered beautifully together!
+
+Recommended image ideas:
+- Tech workspace with baking elements
+- Code + cooking/baking scene
+- Modern kitchen with laptop/tablet
+- Abstract tech pattern with food elements
