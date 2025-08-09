@@ -5,7 +5,7 @@ let currentRecipe = null;
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('📋 DOM loaded, initializing recipe detail page...');
+    console.log('DOM loaded, initializing recipe detail page...');
     
     // Get recipe ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -457,4 +457,4 @@ window.toggleIngredient = toggleIngredient;
 window.printRecipe = printRecipe;
 window.goBack = goBack;
 
-console.log('✅ Recipe detail script loaded successfully - Modular version!');
+console.log('Recipe detail script loaded successfully');

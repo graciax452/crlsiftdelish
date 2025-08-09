@@ -87,7 +87,7 @@ async function initializeApp() {
             throw new Error('No recipe data source available');
         }
         
-        console.log('📋 Recipes loaded:', recipes.map(r => r.title));
+        console.log('Recipes loaded:', recipes.map(r => r.title));
         
         if (!recipes || recipes.length === 0) {
             throw new Error('No recipes loaded from simple individual system');
@@ -256,4 +256,4 @@ if (window.closeModal) {
     delete window.closeModal;
 }
 
-console.log('✅ Page navigation script loaded successfully - MODULAR SYSTEM!');
+console.log('Page navigation script loaded successfully');

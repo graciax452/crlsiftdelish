@@ -22,7 +22,7 @@ async function loadAllJSONRecipes() {
             
             if (response.ok) {
                 const jsonData = await response.json();
-                console.log(`✅ Loaded ${recipe.filename}.json: "${jsonData.title}"`);
+                console.log(`Loaded ${recipe.filename}.json: "${jsonData.title}"`);
                 
                 if (window.RECIPES_DATA) {
                     const index = window.RECIPES_DATA.findIndex(r => r.id === recipe.id);
