@@ -1,0 +1,62 @@
+{
+    "id": 2,
+    "title": "Homemade Focaccia Bread json",
+    "description": "Fluffy, herb-topped focaccia bread that's perfect as a side dish or for making sandwiches.",
+    "image": "images/focaccia-bread.jpg",
+    "time": "3 hours",
+    "difficulty": "Medium",
+    "category": "Bread",
+    "youtubeId": "NGnMrM9qDtE",
+    "tags": ["bread", "italian", "herbs", "olive oil", "artisan"],
+    "servings": 8,
+    "prepTime": "2.5 hours",
+    "cookTime": "25 mins",
+    "lastUpdated": "2025-08-09",
+    "version": "1.0",
+    "ingredients": [
+        "For the Dough:",
+        "4 cups bread flour",
+        "2 tsp salt",
+        "1 tsp active dry yeast",
+        "2 cups warm water",
+        "2 tbsp olive oil",
+        "",
+        "For the Topping:",
+        "2 tbsp olive oil",
+        "Fresh rosemary sprigs",
+        "Coarse sea salt",
+        "Cherry tomatoes (optional)"
+    ],
+    "instructions": [
+        "PREPARE THE DOUGH:",
+        "In a large bowl, whisk together flour and salt.",
+        "In a small bowl, dissolve yeast in warm water. Let stand for 5 minutes until foamy.",
+        "Add yeast mixture and 2 tablespoons olive oil to flour. Mix until a shaggy dough forms.",
+        "",
+        "FIRST RISE:",
+        "Cover and let rise in a warm place for 2 hours, until doubled in size.",
+        "",
+        "SHAPE AND SECOND RISE:",
+        "Oil a 9x13 inch pan with remaining olive oil. Transfer dough to pan and gently stretch to fit.",
+        "Cover and let rise for 30 minutes.",
+        "",
+        "BAKE:",
+        "Preheat oven to 425°F (220°C).",
+        "Use fingers to make dimples all over the dough surface.",
+        "Top with rosemary, cherry tomatoes, and coarse salt.",
+        "Bake for 25-30 minutes until golden brown.",
+        "Cool for 10 minutes before slicing and serving."
+    ],
+    "tips": [
+        "Don't skip the dimpling - it creates the characteristic texture",
+        "Use best quality olive oil for flavor",
+        "Let dough come to room temperature before shaping"
+    ],
+    "nutrition": {
+        "calories": 285,
+        "fat": "9g",
+        "carbs": "45g",
+        "protein": "8g",
+        "fiber": "2g"
+    }
+}

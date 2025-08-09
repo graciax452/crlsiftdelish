@@ -1,21 +1,17 @@
-// Recipe Website JavaScript - Simple Individual Recipe System
-console.log('🎯 Script.js loaded - Simple individual recipe system');
+// Recipe Website JavaScript
+console.log('Script.js loaded');
 
 // Recipe data container
 let recipes = [];
-
-console.log('✅ Ready to load recipes from simple individual system');
 
 // DOM elements
 let recipeGrid;
 let hamburger;
 let navMenu;
 
-// Initialize the application - SIMPLE INDIVIDUAL SYSTEM
+// Initialize the application
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('🎯 DOM loaded, initializing simple individual system...');
-    console.log('🔍 Current RECIPES_DATA:', window.RECIPES_DATA);
-    console.log('🔍 RecipeUtils available:', typeof window.RecipeUtils);
+    console.log('DOM loaded, initializing...');
     
     // Get DOM elements
     recipeGrid = document.getElementById('recipe-grid');
@@ -23,11 +19,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     navMenu = document.querySelector('.nav-menu');
     
     if (!recipeGrid) {
-        console.error('❌ Recipe grid element not found!');
+        console.error('Recipe grid element not found!');
         return;
     }
-    
-    console.log('📋 Found recipe grid element');
     
     // Show loading
     recipeGrid.innerHTML = '<div class="loading">Loading individual recipe files...</div>';
@@ -140,6 +134,9 @@ Data length: ${window.RECIPES_DATA?.length || 'N/A'}
         `;
     }
 }
+
+// Make initializeApp available globally for re-initialization
+window.initializeApp = initializeApp;
 
 // Render recipes to the grid
 async function renderRecipes() {
