@@ -154,13 +154,9 @@ function displayRecipe(recipe) {
                     <i class="fas fa-list"></i>
                     Ingredients
                 </h2>
-                <ul class="ingredients-list">
-                    ${recipe.ingredients.map(ingredient => `
-                        <li class="ingredient-item">
-                            <span class="ingredient-text">${ingredient}</span>
-                        </li>
-                    `).join('')}
-                </ul>
+                <div class="ingredients-list">
+                    ${groupIngredients(recipe.ingredients)}
+                </div>
             </div>
             
             <div class="instructions-section">
@@ -168,13 +164,9 @@ function displayRecipe(recipe) {
                     <i class="fas fa-clipboard-list"></i>
                     Instructions
                 </h2>
-                <ol class="instructions-list">
-                    ${recipe.instructions.map(instruction => `
-                        <li class="instruction-item">
-                            ${instruction}
-                        </li>
-                    `).join('')}
-                </ol>
+                <div class="instructions-list">
+                    ${groupInstructions(recipe.instructions)}
+                </div>
             </div>
             
             ${recipe.youtubeId ? `
@@ -298,6 +290,166 @@ function showError(message) {
             </div>
         `;
     }
+}
+
+// Group ingredients into sections
+function groupIngredients(ingredients) {
+    const sections = [];
+    let currentSection = { title: null, items: [] };
+    
+    for (const ingredient of ingredients) {
+        if (ingredient.endsWith(':')) {
+            // Save previous section if it has items
+            if (currentSection.items.length > 0) {
+                sections.push(currentSection);
+            }
+            // Start new section
+            currentSection = { title: ingredient, items: [] };
+        } else if (ingredient.trim() !== '') {
+            // Add ingredient to current section
+            currentSection.items.push(ingredient);
+        }
+        // Skip empty lines
+    }
+    
+    // Add the last section
+    if (currentSection.items.length > 0) {
+        sections.push(currentSection);
+    }
+    
+    return sections.map(section => `
+        <div class="ingredient-section">
+            ${section.title ? `<div class="ingredient-section-title">${section.title}</div>` : ''}
+            ${section.items.map(item => `<div class="ingredient-item">${item}</div>`).join('')}
+        </div>
+    `).join('');
+}
+
+// Group instructions into sections
+function groupInstructions(instructions) {
+    const sections = [];
+    let currentSection = { title: null, items: [] };
+    let stepNumber = 1;
+    
+    for (const instruction of instructions) {
+        // Check if it's a sub-heading (ends with colon and contains uppercase words)
+        if (instruction.endsWith(':') && 
+            (instruction === instruction.toUpperCase() || 
+             /^[A-Z][A-Z\s\-()]+:/.test(instruction) ||
+             instruction.includes('TANGZHONG') ||
+             instruction.includes('DOUGH') ||
+             instruction.includes('FILLING') ||
+             instruction.includes('RISE') ||
+             instruction.includes('BAKE') ||
+             instruction.includes('ROLL') ||
+             instruction.includes('MORNING'))) {
+            
+            // Save previous section if it has items
+            if (currentSection.items.length > 0) {
+                sections.push(currentSection);
+            }
+            // Start new section
+            currentSection = { title: instruction, items: [] };
+        } else if (instruction.trim() !== '') {
+            // Add instruction to current section with step number
+            currentSection.items.push({ text: instruction, number: stepNumber++ });
+        }
+        // Skip empty lines
+    }
+    
+    // Add the last section
+    if (currentSection.items.length > 0) {
+        sections.push(currentSection);
+    }
+    
+    // If no sections were created (no subsection headers), create one default section
+    if (sections.length === 0 && instructions.some(inst => inst.trim() !== '')) {
+        const allSteps = instructions
+            .filter(inst => inst.trim() !== '')
+            .map((inst, index) => ({ text: inst, number: index + 1 }));
+        sections.push({ title: null, items: allSteps });
+    }
+
+    // Check for alternative methods (Stand Mixer and Hand Method)
+    const mixerIndex = sections.findIndex(s => s.title && s.title.includes('Stand Mixer Method'));
+    const handIndex = sections.findIndex(s => s.title && s.title.includes('Hand Method'));
+    
+    if (mixerIndex !== -1 && handIndex !== -1 && handIndex === mixerIndex + 1) {
+        // Found consecutive alternative methods - render them in columns
+        const mixerSection = sections[mixerIndex];
+        const handSection = sections[handIndex];
+        
+        // Use the mixer section's step numbers for both columns
+        const baseStepNumber = mixerSection.items.length > 0 ? mixerSection.items[0].number : 1;
+        
+        const alternativeMethodsHTML = `
+            <div class="instruction-section alternative-methods">
+                <div class="alternative-methods-container">
+                    <div class="method-column">
+                        <div class="instruction-section-title">${mixerSection.title}</div>
+                        ${mixerSection.items.map((item, index) => `
+                            <div class="instruction-item">
+                                <span class="step-number">${baseStepNumber + index}</span>
+                                <span class="step-text">${item.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="method-column">
+                        <div class="instruction-section-title">${handSection.title}</div>
+                        ${handSection.items.map((item, index) => `
+                            <div class="instruction-item">
+                                <span class="step-number">${baseStepNumber + index}</span>
+                                <span class="step-text">${item.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Replace both sections with the combined alternative methods
+        const beforeSections = sections.slice(0, mixerIndex);
+        const afterSections = sections.slice(handIndex + 1);
+        
+        return [
+            ...beforeSections.map(section => `
+                <div class="instruction-section">
+                    ${section.title ? `<div class="instruction-section-title">${section.title}</div>` : ''}
+                    ${section.items.map(item => `
+                        <div class="instruction-item">
+                            <span class="step-number">${item.number}</span>
+                            <span class="step-text">${item.text}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `),
+            alternativeMethodsHTML,
+            ...afterSections.map(section => `
+                <div class="instruction-section">
+                    ${section.title ? `<div class="instruction-section-title">${section.title}</div>` : ''}
+                    ${section.items.map(item => `
+                        <div class="instruction-item">
+                            <span class="step-number">${item.number}</span>
+                            <span class="step-text">${item.text}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `)
+        ].join('');
+    }
+
+    // Default rendering for non-alternative sections
+    return sections.map(section => `
+        <div class="instruction-section">
+            ${section.title ? `<div class="instruction-section-title">${section.title}</div>` : ''}
+            ${section.items.map(item => `
+                <div class="instruction-item">
+                    <span class="step-number">${item.number}</span>
+                    <span class="step-text">${item.text}</span>
+                </div>
+            `).join('')}
+        </div>
+    `).join('');
 }
 
 // Export functions for global access
