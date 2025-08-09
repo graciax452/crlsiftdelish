@@ -6,7 +6,11 @@ async function loadAllJSONRecipes() {
     
     const recipesToLoad = [
         { id: 1, filename: 'cinnamon-rolls' },
-        { id: 2, filename: 'homemade-focaccia-bread' }
+        { id: 2, filename: 'homemade-focaccia-bread' },
+        { id: 3, filename: 'apple-crisp' },
+        { id: 4, filename: 'butter-scones' },
+        { id: 5, filename: 'chocolate-fudge' },
+        { id: 6, filename: 'vanilla-fudge' }
     ];
     
     let replacements = 0;

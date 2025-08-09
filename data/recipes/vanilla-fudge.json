@@ -1,0 +1,48 @@
+{
+    "id": 6,
+    "title": "Vanilla Fudge",
+    "description": "Creamy, melt-in-your-mouth vanilla fudge that's perfect for gifting or indulging.",
+    "image": "images/vanilla-fudge.jpg",
+    "time": "2 hours",
+    "difficulty": "Medium",
+    "category": "Desserts",
+    "youtubeId": "dQw4w9WgXcQ",
+    "tags": ["fudge", "vanilla", "candy", "sweet", "gift"],
+    "servings": 36,
+    "prepTime": "15 mins",
+    "cookTime": "1 hour 45 mins",
+    "ingredients": [
+        "3 cups granulated sugar",
+        "¾ cup butter",
+        "⅔ cup evaporated milk",
+        "12 oz white chocolate chips",
+        "7 oz marshmallow creme",
+        "2 tsp vanilla extract",
+        "Pinch of salt"
+    ],
+    "instructions": [
+        "Line 9x13 inch pan with foil and butter it.",
+        "In heavy saucepan, combine sugar, butter, and evaporated milk.",
+        "Bring to rolling boil, stirring constantly.",
+        "Boil 4 minutes, stirring constantly.",
+        "Remove from heat and stir in white chocolate chips until melted.",
+        "Add marshmallow creme, vanilla, and salt. Beat until well blended.",
+        "Pour into prepared pan and spread evenly.",
+        "Cool completely before cutting into squares.",
+        "Store in airtight container."
+    ],
+    "tips": [
+        "Use a candy thermometer for best results (234°F)",
+        "Don't scrape the sides of the pan when boiling",
+        "Work quickly once off heat as fudge sets fast"
+    ],
+    "nutrition": {
+        "calories": 145,
+        "fat": "5g",
+        "carbs": "25g",
+        "protein": "1g",
+        "sugar": "24g"
+    },
+    "lastUpdated": "2025-08-09",
+    "version": "1.0"
+}

@@ -1,0 +1,50 @@
+{
+    "id": 3,
+    "title": "Apple Crisp j",
+    "description": "A classic apple crisp with a golden, crunchy oat topping served warm with vanilla ice cream.",
+    "image": "images/apple-crisp.jpg",
+    "time": "1 hour",
+    "difficulty": "Easy",
+    "category": "Desserts",
+    "youtubeId": "4BfGLGGWCKA",
+    "tags": ["apple", "dessert", "oats", "cinnamon", "comfort food"],
+    "servings": 8,
+    "prepTime": "20 mins",
+    "cookTime": "45 mins",
+    "ingredients": [
+        "6 large apples, peeled and sliced",
+        "1 cup old-fashioned oats",
+        "1 cup all-purpose flour",
+        "1 cup packed brown sugar",
+        "½ cup cold butter, cubed",
+        "1 tsp ground cinnamon",
+        "½ tsp ground nutmeg",
+        "¼ tsp salt",
+        "2 tbsp granulated sugar",
+        "1 tbsp lemon juice"
+    ],
+    "instructions": [
+        "Preheat oven to 375°F (190°C). Grease a 9x13 inch baking dish.",
+        "In a large bowl, toss sliced apples with granulated sugar, lemon juice, and half the cinnamon.",
+        "Arrange apples in prepared baking dish.",
+        "In another bowl, combine oats, flour, brown sugar, remaining cinnamon, nutmeg, and salt.",
+        "Cut in cold butter until mixture resembles coarse crumbs.",
+        "Sprinkle topping evenly over apples.",
+        "Bake 45 minutes or until topping is golden brown and apples are tender.",
+        "Serve warm with vanilla ice cream."
+    ],
+    "tips": [
+        "Use a mix of apple varieties for best flavor",
+        "Keep butter cold for crispier topping",
+        "Cover with foil if topping browns too quickly"
+    ],
+    "nutrition": {
+        "calories": 245,
+        "fat": "6g",
+        "carbs": "52g",
+        "protein": "3g",
+        "fiber": "4g"
+    },
+    "lastUpdated": "2025-08-09",
+    "version": "1.0"
+}

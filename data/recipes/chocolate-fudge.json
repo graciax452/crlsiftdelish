@@ -1,0 +1,43 @@
+{
+    "id": 5,
+    "title": "Chocolate Fudge",
+    "description": "Rich and creamy chocolate fudge made with just three simple ingredients - perfect for gifting or indulging.",
+    "image": "images/chocolate-fudge.jpg",
+    "time": "2+ hours",
+    "difficulty": "Easy",
+    "category": "Desserts",
+    "youtubeId": "dQw4w9WgXcQ",
+    "tags": ["chocolate", "fudge", "easy", "dessert", "gift", "condensed milk"],
+    "servings": 16,
+    "prepTime": "10 mins",
+    "cookTime": "2+ hours chilling",
+    "ingredients": [
+        "340g semi-sweet chocolate chips",
+        "1 can condensed milk (≈400g)",
+        "5g vanilla extract"
+    ],
+    "instructions": [
+        "Line an 8x8 inch pan with parchment paper, leaving overhang for easy removal.",
+        "In a heavy-bottomed saucepan, combine chocolate chips and condensed milk over low heat.",
+        "Stir constantly until chocolate is completely melted and mixture is smooth (about 5-7 minutes).",
+        "Remove from heat and stir in vanilla extract until well combined.",
+        "Pour mixture into prepared pan and spread evenly.",
+        "Refrigerate for at least 2 hours or until completely set.",
+        "Using parchment overhang, lift fudge from pan and cut into squares.",
+        "Store in airtight container in refrigerator."
+    ],
+    "tips": [
+        "Use low heat to prevent chocolate from seizing or burning",
+        "Stir constantly for smooth, even melting",
+        "Line pan well for easy removal and clean cuts"
+    ],
+    "nutrition": {
+        "calories": 185,
+        "fat": "7g",
+        "carbs": "32g",
+        "protein": "3g",
+        "sugar": "29g"
+    },
+    "lastUpdated": "2025-08-09",
+    "version": "1.0"
+}
