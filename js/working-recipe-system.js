@@ -5,8 +5,8 @@ console.log('🎯 Loading working recipe system with all data...');
 window.RECIPES_DATA = [
     {
         id: 1,
-        title: "Ultra-Detailed Cinnamon Rolls (Overnight Tangzhong Method)",
-        description: "Perfect for teens – Hand & Stand Mixer Instructions! Makes 8 big rolls (10cm) or 12 small rolls (7cm) with amazing swirls and fluffy texture.",
+        title: "Cinnamon Rolls (Overnight Tangzhong Method)",
+        description: "Hand & Stand Mixer Instructions! Makes 8 big rolls (10cm) or 12 small rolls (7cm) with amazing swirls and fluffy texture.",
         image: "images/cinnamon-rolls.jpg",
         time: "12+ hours (overnight)",
         difficulty: "Hard",
