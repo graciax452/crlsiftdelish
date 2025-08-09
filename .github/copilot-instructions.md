@@ -1,6 +1,6 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# Ctrl+Shift+Delish Recipe Website
+# Ctrl+Sift+Delish Recipe Website
 
 This is a static recipe website built with HTML, CSS, and JavaScript for hosting on GitHub Pages.
 

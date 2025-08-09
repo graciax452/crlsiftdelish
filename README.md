@@ -1,4 +1,4 @@
-# Ctrl+Shift+Delish Recipe Website
+# Ctrl+Sift+Delish Recipe Website
 
 A modern, responsive static website for sharing cooking and baking recipes with images and YouTube video links. Perfect for home cooks of all skill levels who want to showcase their culinary creations with a fun, tech-inspired twist.
 

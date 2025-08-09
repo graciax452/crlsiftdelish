@@ -1,18 +1,11 @@
-// Recipe Detail Page JavaScript - Modular Version
-console.log('🍳 Recipe detail page loaded');
+// Recipe Detail Page JavaScript - Working Recipe System
+console.log('🍳 Recipe detail page loaded - Working recipe system version');
 
 let currentRecipe = null;
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('📋 DOM loaded, initializing recipe detail page...');
-    
-    // Check if recipe data module is loaded
-    if (typeof RecipeUtils === 'undefined') {
-        console.error('❌ Recipe data module not loaded!');
-        showError('Recipe data could not be loaded. Please go back to the main page.');
-        return;
-    }
     
     // Get recipe ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -26,15 +19,61 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log(`🔍 Looking for recipe with ID: ${recipeId}`);
     
+    // Wait for the working recipe system to be ready
+    await waitForWorkingRecipeSystem();
+    
     // Load and display the recipe
     loadAndDisplayRecipe(parseInt(recipeId));
 });
 
+// Wait for the working recipe system to be ready
+async function waitForWorkingRecipeSystem() {
+    return new Promise((resolve) => {
+        // Check if already ready
+        if (window.RecipeUtils && window.RECIPES_DATA) {
+            console.log('✅ Working recipe system already ready');
+            resolve();
+            return;
+        }
+        
+        // Listen for the system to be ready
+        window.addEventListener('recipesLoaded', (event) => {
+            console.log('📨 Received recipesLoaded event:', event.detail);
+            if (event.detail.system === 'simple-individual') {
+                console.log('✅ Working recipe system is ready');
+                resolve();
+            }
+        });
+        
+        // Fallback timeout
+        setTimeout(() => {
+            console.log('⏰ Timeout reached, proceeding anyway');
+            resolve();
+        }, 3000);
+    });
+}
+
 // Load and display a specific recipe
-function loadAndDisplayRecipe(recipeId) {
+async function loadAndDisplayRecipe(recipeId) {
     try {
-        // Get recipe from data module
-        currentRecipe = RecipeUtils.getRecipeById(recipeId);
+        // Check if RecipeUtils is available
+        if (!window.RecipeUtils) {
+            throw new Error('Working recipe system not loaded');
+        }
+        
+        // Show loading state
+        const container = document.getElementById('recipe-container');
+        if (container) {
+            container.innerHTML = `
+                <div class="loading" style="text-align: center; padding: 4rem 2rem; color: #718096;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Loading recipe...</p>
+                </div>
+            `;
+        }
+        
+        // Get recipe from working system
+        currentRecipe = await RecipeUtils.getRecipeById(recipeId);
         
         if (!currentRecipe) {
             console.error(`❌ Recipe with ID ${recipeId} not found`);
@@ -45,7 +84,7 @@ function loadAndDisplayRecipe(recipeId) {
         console.log(`✅ Found recipe: ${currentRecipe.title}`);
         
         // Update page title
-        document.title = `${currentRecipe.title} - Ctrl+Shift+Delish`;
+        document.title = `${currentRecipe.title} - Ctrl+Sift+Delish`;
         
         // Display the recipe
         displayRecipe(currentRecipe);
@@ -227,7 +266,7 @@ function printRecipe() {
             </div>
             
             <div class="section">
-                <p><small>Recipe from Ctrl+Shift+Delish - ${window.location.origin}</small></p>
+                <p><small>Recipe from Ctrl+Sift+Delish - ${window.location.origin}</small></p>
             </div>
         </body>
         </html>
