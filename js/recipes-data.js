@@ -1,8 +1,7 @@
-// Recipe Website JavaScript - Page Navigation Only (Simplified)
-console.log('� Script.js loaded - Simplified version for direct file opening');
+// Recipe Data Module - Separated for better organization
+// This file contains all recipe data and can easily scale to 1000+ recipes
 
-// Sample recipe data - immediately available
-let recipes = [
+const RECIPES_DATA = [
     {
         id: 1,
         title: "Classic Chocolate Chip Cookies",
@@ -10,6 +9,7 @@ let recipes = [
         image: "images/chocolate-fudge.jpg",
         time: "25 mins",
         difficulty: "Easy",
+        category: "Desserts",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "2¼ cups all-purpose flour",
@@ -41,6 +41,7 @@ let recipes = [
         image: "images/focaccia-bread.jpg",
         time: "3 hours",
         difficulty: "Medium",
+        category: "Bread",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "4 cups bread flour",
@@ -73,6 +74,7 @@ let recipes = [
         image: "images/apple-crisp.jpg",
         time: "1 hour",
         difficulty: "Easy",
+        category: "Desserts",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "6 large apples, peeled and sliced",
@@ -103,6 +105,7 @@ let recipes = [
         image: "images/butter-scones.jpg",
         time: "30 mins",
         difficulty: "Medium",
+        category: "Breakfast",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "2 cups all-purpose flour",
@@ -134,6 +137,7 @@ let recipes = [
         image: "images/cinnamon-rolls.jpg",
         time: "3 hours",
         difficulty: "Hard",
+        category: "Breakfast",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "3½ cups all-purpose flour",
@@ -168,6 +172,7 @@ let recipes = [
         image: "images/vanilla-fudge.jpg",
         time: "2 hours",
         difficulty: "Medium",
+        category: "Desserts",
         youtubeId: "dQw4w9WgXcQ",
         ingredients: [
             "3 cups white sugar",
@@ -192,155 +197,43 @@ let recipes = [
     }
 ];
 
-console.log(`✅ Loaded ${recipes.length} recipes`);
+// Recipe utility functions
+const RecipeUtils = {
+    // Get all recipes
+    getAllRecipes: () => RECIPES_DATA,
+    
+    // Get recipe by ID
+    getRecipeById: (id) => RECIPES_DATA.find(recipe => recipe.id === parseInt(id)),
+    
+    // Get recipes by category
+    getRecipesByCategory: (category) => RECIPES_DATA.filter(recipe => recipe.category === category),
+    
+    // Get recipes by difficulty
+    getRecipesByDifficulty: (difficulty) => RECIPES_DATA.filter(recipe => recipe.difficulty === difficulty),
+    
+    // Search recipes by title or description
+    searchRecipes: (searchTerm) => {
+        const term = searchTerm.toLowerCase();
+        return RECIPES_DATA.filter(recipe => 
+            recipe.title.toLowerCase().includes(term) || 
+            recipe.description.toLowerCase().includes(term)
+        );
+    },
+    
+    // Get total recipe count
+    getRecipeCount: () => RECIPES_DATA.length,
+    
+    // Get all categories
+    getCategories: () => [...new Set(RECIPES_DATA.map(recipe => recipe.category))],
+    
+    // Get all difficulty levels
+    getDifficulties: () => [...new Set(RECIPES_DATA.map(recipe => recipe.difficulty))]
+};
 
-// DOM elements
-let recipeGrid;
-let hamburger;
-let navMenu;
-
-// Initialize the application - SIMPLIFIED
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🎯 DOM loaded, initializing...');
-    
-    // Get DOM elements
-    recipeGrid = document.getElementById('recipe-grid');
-    hamburger = document.querySelector('.hamburger');
-    navMenu = document.querySelector('.nav-menu');
-    
-    if (!recipeGrid) {
-        console.error('❌ Recipe grid element not found!');
-        return;
-    }
-    
-    console.log('📋 Found recipe grid element');
-    
-    // Show loading briefly
-    recipeGrid.innerHTML = '<div class="loading">Loading recipes...</div>';
-    
-    // Add small delay to show loading, then render
-    setTimeout(() => {
-        renderRecipes();
-        setupNavigation();
-        setupSmoothScrolling();
-        console.log(`🎉 Successfully rendered ${recipes.length} recipes`);
-    }, 100);
-});
-
-// Render recipes to the grid
-function renderRecipes() {
-    recipeGrid.innerHTML = '';
-    
-    recipes.forEach(recipe => {
-        const recipeCard = createRecipeCard(recipe);
-        recipeGrid.appendChild(recipeCard);
-    });
+// Export for use in other files
+if (typeof window !== 'undefined') {
+    window.RECIPES_DATA = RECIPES_DATA;
+    window.RecipeUtils = RecipeUtils;
 }
 
-// Create a recipe card element - PAGE NAVIGATION ONLY
-function createRecipeCard(recipe) {
-    const card = document.createElement('div');
-    card.className = 'recipe-card';
-    card.setAttribute('data-recipe-id', recipe.id);
-    
-    card.innerHTML = `
-        <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image" onclick="viewRecipePage(${recipe.id})" style="cursor: pointer;">
-        <div class="recipe-content">
-            <h3 class="recipe-title">${recipe.title}</h3>
-            <p class="recipe-description">${recipe.description}</p>
-            <div class="recipe-meta">
-                <span class="recipe-time">
-                    <i class="fas fa-clock"></i>
-                    ${recipe.time}
-                </span>
-                <span class="recipe-difficulty">
-                    <i class="fas fa-chart-bar"></i>
-                    ${recipe.difficulty}
-                </span>
-            </div>
-            <div class="recipe-actions">
-                <button class="btn btn-primary" onclick="viewRecipePage(${recipe.id})">
-                    <i class="fas fa-eye"></i>
-                    View Recipe
-                </button>
-                <a href="https://youtube.com/watch?v=${recipe.youtubeId || 'dQw4w9WgXcQ'}" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-youtube"></i>
-                    Watch Video
-                </a>
-            </div>
-        </div>
-    `;
-    
-    return card;
-}
-
-// Setup mobile navigation
-function setupNavigation() {
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-}
-
-// Setup smooth scrolling for navigation links
-function setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Animation on scroll
-function animateOnScroll() {
-    const cards = document.querySelectorAll('.recipe-card');
-    
-    cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        const cardVisible = 150;
-        
-        if (cardTop < window.innerHeight - cardVisible) {
-            card.style.animation = 'fadeInUp 0.6s ease forwards';
-        }
-    });
-}
-
-window.addEventListener('scroll', animateOnScroll);
-
-// Navigate to recipe detail page - NO MODAL, PAGE ONLY
-function viewRecipePage(recipeId) {
-    console.log(`Navigating to recipe page for ID: ${recipeId}`);
-    window.location.href = `recipe.html?id=${recipeId}`;
-}
-
-// Export functions for global access
-window.viewRecipePage = viewRecipePage;
-window.recipes = recipes;
-
-// Make sure no modal functions exist
-if (window.viewRecipe) {
-    delete window.viewRecipe;
-}
-if (window.closeModal) {
-    delete window.closeModal;
-}
-
-console.log('✅ Page navigation script loaded successfully - NO MODALS');
+console.log(`📚 Recipe data module loaded with ${RECIPES_DATA.length} recipes`);
