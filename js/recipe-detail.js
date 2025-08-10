@@ -1,5 +1,5 @@
-// Recipe Detail Page JavaScript - Working Recipe System
-console.log('🍳 Recipe detail page loaded - Working recipe system version');
+// Recipe Detail Page JavaScript
+console.log('Recipe detail page loaded');
 
 let currentRecipe = null;
 
@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     const recipeId = urlParams.get('id');
     
     if (!recipeId) {
-        console.error('❌ No recipe ID provided in URL');
+        console.error('No recipe ID provided in URL');
         showError('No recipe specified. Please go back to the main page and select a recipe.');
         return;
     }
     
-    console.log(`🔍 Looking for recipe with ID: ${recipeId}`);
+    console.log(`Looking for recipe with ID: ${recipeId}`);
     
     // Wait for the working recipe system to be ready
     await waitForWorkingRecipeSystem();
@@ -29,27 +29,37 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Wait for the working recipe system to be ready
 async function waitForWorkingRecipeSystem() {
     return new Promise((resolve) => {
-        // Check if already ready
-        if (window.RecipeUtils && window.RECIPES_DATA) {
-            console.log('✅ Working recipe system already ready');
-            resolve();
-            return;
-        }
+        let attempts = 0;
+        const maxAttempts = 20; // 10 seconds max wait
         
-        // Listen for the system to be ready
-        window.addEventListener('recipesLoaded', (event) => {
-            console.log('📨 Received recipesLoaded event:', event.detail);
-            if (event.detail.system === 'simple-individual') {
-                console.log('✅ Working recipe system is ready');
-                resolve();
+        const checkSystem = () => {
+            attempts++;
+            
+            // Check if basic system is ready
+            if (window.RecipeUtils && window.RECIPES_DATA) {
+                // Check if JSON replacement has occurred (look for real data, not "Loading...")
+                const hasRealData = window.RECIPES_DATA.some(recipe => 
+                    recipe.title && recipe.title !== "Loading..." && !recipe.title.includes("Loading")
+                );
+                
+                if (hasRealData) {
+                    console.log('Recipe system ready with JSON data');
+                    resolve();
+                    return;
+                }
             }
-        });
+            
+            if (attempts >= maxAttempts) {
+                console.log('Timeout waiting for recipe system, proceeding anyway');
+                resolve();
+                return;
+            }
+            
+            // Try again in 500ms
+            setTimeout(checkSystem, 500);
+        };
         
-        // Fallback timeout
-        setTimeout(() => {
-            console.log('⏰ Timeout reached, proceeding anyway');
-            resolve();
-        }, 3000);
+        checkSystem();
     });
 }
 
@@ -75,13 +85,19 @@ async function loadAndDisplayRecipe(recipeId) {
         // Get recipe from working system
         currentRecipe = await RecipeUtils.getRecipeById(recipeId);
         
+        // Debug: log the recipe data to see what we're getting
+        console.log('Recipe data loaded:', currentRecipe);
+        console.log('PrepTime:', currentRecipe?.prepTime);
+        console.log('RestTime:', currentRecipe?.restTime);
+        console.log('CookTime:', currentRecipe?.cookTime);
+        
         if (!currentRecipe) {
-            console.error(`❌ Recipe with ID ${recipeId} not found`);
+            console.error(`Recipe with ID ${recipeId} not found`);
             showError(`Recipe not found. The recipe you're looking for doesn't exist.`);
             return;
         }
         
-        console.log(`✅ Found recipe: ${currentRecipe.title}`);
+        console.log(`Found recipe: ${currentRecipe.title}`);
         
         // Update page title
         document.title = `${currentRecipe.title} - Ctrl+Sift+Delish`;
@@ -90,7 +106,7 @@ async function loadAndDisplayRecipe(recipeId) {
         displayRecipe(currentRecipe);
         
     } catch (error) {
-        console.error('❌ Error loading recipe:', error);
+        console.error('Error loading recipe:', error);
         showError('Failed to load recipe. Please try again.');
     }
 }
@@ -100,7 +116,7 @@ function displayRecipe(recipe) {
     const container = document.getElementById('recipe-container');
     
     if (!container) {
-        console.error('❌ Recipe container not found!');
+        console.error('Recipe container not found!');
         return;
     }
     
@@ -113,24 +129,33 @@ function displayRecipe(recipe) {
             <div class="recipe-info">
                 <h1 class="recipe-title">${recipe.title}</h1>
                 <p class="recipe-description">${recipe.description}</p>
-                
-                <div class="recipe-meta-grid">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i>
-                        <div class="meta-value">${recipe.time}</div>
-                        <div class="meta-label">Prep Time</div>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-chart-bar"></i>
-                        <div class="meta-value">${recipe.difficulty}</div>
-                        <div class="meta-label">Difficulty</div>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-utensils"></i>
-                        <div class="meta-value">${recipe.category || 'Recipe'}</div>
-                        <div class="meta-label">Category</div>
-                    </div>
-                </div>
+                <div class="recipe-meta">
+                ${recipe.prepTime ? `<span class="recipe-time">
+                    <i class="fas fa-clock"></i>
+                    <span class="time-value">${recipe.prepTime}</span>
+                    <span class="time-label">Prep</span>
+                </span>` : ''}
+                ${recipe.restTime ? `<span class="recipe-time">
+                    <i class="fas fa-bed"></i>
+                    <span class="time-value">${recipe.restTime}</span>
+                    <span class="time-label">Rest</span>
+                </span>` : ''}
+                ${recipe.cookTime ? `<span class="recipe-time">
+                    <i class="fas fa-fire"></i>
+                    <span class="time-value">${recipe.cookTime}</span>
+                    <span class="time-label">Cook</span>
+                </span>` : ''}
+                ${recipe.time ? `<span class="recipe-time">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span class="time-value">${recipe.time}</span>
+                    <span class="time-label">Total</span>
+                </span>` : ''}
+                <span class="recipe-difficulty">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="time-value">${recipe.difficulty}</span>
+                    <span class="time-label">Difficulty</span>
+                </span>
+            </div>
                 
                 <div class="recipe-actions">
                     <button class="action-btn primary" onclick="printRecipe()">
@@ -190,7 +215,7 @@ function displayRecipe(recipe) {
         </div>
     `;
     
-    console.log(`✅ Recipe "${recipe.title}" displayed successfully`);
+    console.log(`Recipe "${recipe.title}" displayed successfully`);
 }
 
 // Toggle ingredient checked state

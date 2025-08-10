@@ -18,7 +18,8 @@ async function loadAllJSONRecipes() {
     for (const recipe of recipesToLoad) {
         try {
             console.log(`Loading ${recipe.filename}.json...`);
-            const response = await fetch(`data/recipes/${recipe.filename}.json`);
+            const timestamp = new Date().getTime();
+            const response = await fetch(`data/recipes/${recipe.filename}.json?t=${timestamp}`);
             
             if (response.ok) {
                 const jsonData = await response.json();
