@@ -85,19 +85,11 @@ async function loadAndDisplayRecipe(recipeId) {
         // Get recipe from working system
         currentRecipe = await RecipeUtils.getRecipeById(recipeId);
         
-        // Debug: log the recipe data to see what we're getting
-        console.log('Recipe data loaded:', currentRecipe);
-        console.log('PrepTime:', currentRecipe?.prepTime);
-        console.log('RestTime:', currentRecipe?.restTime);
-        console.log('CookTime:', currentRecipe?.cookTime);
-        
         if (!currentRecipe) {
             console.error(`Recipe with ID ${recipeId} not found`);
             showError(`Recipe not found. The recipe you're looking for doesn't exist.`);
             return;
         }
-        
-        console.log(`Found recipe: ${currentRecipe.title}`);
         
         // Update page title
         document.title = `${currentRecipe.title} - Ctrl+Sift+Delish`;
@@ -117,6 +109,13 @@ function displayRecipe(recipe) {
     
     if (!container) {
         console.error('Recipe container not found!');
+        return;
+    }
+    
+    // Ensure required properties exist
+    if (!recipe.image || !recipe.title) {
+        console.error('Recipe missing required properties:', recipe);
+        showError('Recipe data incomplete. Please try refreshing the page.');
         return;
     }
     
@@ -366,17 +365,21 @@ function groupInstructions(instructions) {
     let stepNumber = 1;
     
     for (const instruction of instructions) {
-        // Check if it's a sub-heading (ends with colon and contains uppercase words)
+        // Check if it's a sub-heading (ends with colon and contains uppercase words or markdown formatting)
         if (instruction.endsWith(':') && 
             (instruction === instruction.toUpperCase() || 
              /^[A-Z][A-Z\s\-()]+:/.test(instruction) ||
+             /^\*\*.*\*\*:?$/.test(instruction) ||  // Markdown bold formatting
              instruction.includes('TANGZHONG') ||
              instruction.includes('DOUGH') ||
              instruction.includes('FILLING') ||
              instruction.includes('RISE') ||
              instruction.includes('BAKE') ||
              instruction.includes('ROLL') ||
-             instruction.includes('MORNING'))) {
+             instruction.includes('MORNING') ||
+             instruction.includes('Prepare the') ||
+             instruction.includes('Make the') ||
+             instruction.includes('Bake and'))) {
             
             // Save previous section if it has items
             if (currentSection.items.length > 0) {

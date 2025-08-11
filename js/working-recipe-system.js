@@ -1,8 +1,4 @@
-// Working Recipe System - All Data Included
-console.log('Loading recipe system...');
-
 // Working Recipe System - Minimal placeholders for JSON replacement
-console.log('Loading recipe system...');
 
 // Minimal placeholder data - will be replaced by JSON files
 window.RECIPES_DATA = [

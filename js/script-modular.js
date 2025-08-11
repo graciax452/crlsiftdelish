@@ -240,7 +240,6 @@ window.addEventListener('scroll', animateOnScroll);
 
 // Navigate to recipe detail page - NO MODAL, PAGE ONLY
 function viewRecipePage(recipeId) {
-    console.log(`Navigating to recipe page for ID: ${recipeId}`);
     window.location.href = `recipe.html?id=${recipeId}`;
 }
 
