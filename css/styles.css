@@ -661,3 +661,320 @@ body {
 .ingredients-list li.checked .ingredient-checkbox {
     color: var(--secondary-color);
 }
+
+/* Measurement Toggle Styles - Advanced 3D Rocker Switch */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.measurement-toggle {
+    display: flex;
+    align-items: center;
+}
+
+/* Advanced 3D Rocker Switch - Inspired by CodePen design */
+.measurement-switch {
+    position: relative;
+    display: block;
+    width: 140px;
+    height: 50px;
+    border-radius: 25px;
+    box-shadow:
+        0 2px 4px hsl(223, 10%, 65%) inset,
+        0 -2px 4px hsl(223, 10%, 87.5%) inset,
+        0 8px 16px hsl(223, 10%, 70%) inset;
+    transition: box-shadow 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.measurement-switch:hover {
+    box-shadow:
+        0 2px 4px hsl(223, 10%, 60%) inset,
+        0 -2px 4px hsl(223, 10%, 90%) inset,
+        0 8px 20px hsl(223, 10%, 65%) inset;
+}
+
+.measurement-switch:focus-visible {
+    box-shadow:
+        0 2px 4px hsl(223, 10%, 65%) inset,
+        0 -2px 4px hsl(223, 10%, 87.5%) inset,
+        0 8px 16px hsl(223, 10%, 70%) inset,
+        0 0 0 3px hsla(223, 90%, 50%, 0.3);
+}
+
+.switch-inner {
+    background: linear-gradient(145deg, hsl(223, 10%, 90%), hsl(223, 10%, 85%));
+    box-shadow: 0 -4px 8px hsl(223, 10%, 80%) inset;
+    border-radius: 20px;
+    display: block;
+    perspective: 20em;
+    position: absolute;
+    inset: 8px;
+    transition:
+        background 0.3s,
+        box-shadow 0.3s;
+}
+
+.switch-options {
+    background: inherit;
+    border-radius: inherit;
+    box-shadow: 0 0 2px hsl(0, 0%, 100%) inset;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-2px) rotateY(-8deg);
+    transition:
+        background 0.3s,
+        box-shadow 0.3s,
+        transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    position: relative;
+}
+
+.switch-options:before,
+.switch-options:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 45%;
+    height: 100%;
+    transition: opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.switch-options:before {
+    border-radius: 20px 0 0 20px;
+    box-shadow:
+        0 2px 2px hsla(223, 10%, 10%, 0.4) inset,
+        4px 8px 8px hsla(223, 10%, 10%, 0.2) inset;
+    mask-image: linear-gradient(-90deg, hsla(223, 10%, 90%, 0), hsl(223, 10%, 90%));
+    left: 0;
+}
+
+.switch-options:after {
+    border-radius: 0 20px 20px 0;
+    box-shadow:
+        0 2px 2px hsla(223, 10%, 10%, 0.4) inset,
+        -4px 8px 8px hsla(223, 10%, 10%, 0.2) inset;
+    mask-image: linear-gradient(90deg, hsla(223, 10%, 90%, 0), hsl(223, 10%, 90%));
+    right: 0;
+    opacity: 0;
+}
+
+.switch-option {
+    color: hsl(223, 10%, 60%);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+    font-size: 0.75rem;
+    letter-spacing: 0.3px;
+    text-shadow:
+        0 -1px 0 hsl(223, 10%, 40%),
+        0 1px 0 hsl(0, 0%, 100%);
+    transition:
+        color 0.3s,
+        text-shadow 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.switch-option:first-child {
+    color: #667eea;
+    text-shadow:
+        0 -1px 0 rgba(102, 126, 234, 0.3),
+        0 1px 0 hsl(0, 0%, 100%);
+}
+
+.switch-option:last-child {
+    color: hsl(223, 10%, 60%);
+}
+
+.switch-separator {
+    background: linear-gradient(to bottom, transparent, hsl(223, 10%, 75%), transparent);
+    box-shadow: 1px 0 0 hsl(0, 0%, 100%);
+    width: 1px;
+    min-width: 1px;
+    margin: auto 0;
+    height: 20px;
+    transition:
+        background 0.3s,
+        box-shadow 0.3s;
+}
+
+.switch-shadow {
+    border-radius: 12px 28px 12px 12px / 12px 20px 4px 12px;
+    box-shadow: 0 0 0 2px hsla(223, 10%, 10%, 0.4);
+    display: block;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 40px;
+    height: 24px;
+    transform: rotate(0);
+    transform-origin: 32px 12px;
+    transition:
+        box-shadow 0.3s cubic-bezier(0.65, 0, 0.35, 1),
+        transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: -1;
+}
+
+.switch-shadow:nth-child(2) {
+    border-radius: 28px 12px 12px 12px / 20px 12px 12px 4px;
+    box-shadow: 0 0 8px 2px hsla(223, 10%, 10%, 0.4);
+    right: 12px;
+    left: auto;
+    transform: rotate(4deg);
+    transform-origin: 16px 12px;
+}
+
+/* Imperial state (switched) */
+.measurement-switch.imperial .switch-options {
+    transform: translateX(2px) rotateY(8deg);
+}
+
+.measurement-switch.imperial .switch-options:before {
+    opacity: 0;
+}
+
+.measurement-switch.imperial .switch-options:after {
+    opacity: 1;
+}
+
+.measurement-switch.imperial .switch-option {
+    color: hsl(223, 10%, 60%);
+}
+
+.measurement-switch.imperial .switch-option:last-child {
+    color: #667eea;
+    text-shadow:
+        0 -1px 0 rgba(102, 126, 234, 0.3),
+        0 1px 0 hsl(0, 0%, 100%);
+}
+
+.measurement-switch.imperial .switch-shadow {
+    box-shadow: 0 0 8px 2px hsla(223, 10%, 10%, 0.4);
+    transform: rotate(-4deg);
+}
+
+.measurement-switch.imperial .switch-shadow:nth-child(2) {
+    box-shadow: 0 0 0 2px hsla(223, 10%, 10%, 0.4);
+    transform: rotate(0);
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+    .measurement-switch {
+        box-shadow:
+            0 2px 4px hsl(223, 10%, 5%) inset,
+            0 -2px 4px hsl(223, 10%, 27.5%) inset,
+            0 8px 16px hsl(223, 10%, 20%) inset;
+    }
+    
+    .measurement-switch:hover {
+        box-shadow:
+            0 2px 4px hsl(223, 10%, 0%) inset,
+            0 -2px 4px hsl(223, 10%, 30%) inset,
+            0 8px 20px hsl(223, 10%, 15%) inset;
+    }
+
+    .switch-inner,
+    .switch-options {
+        background: linear-gradient(145deg, hsl(223, 10%, 30%), hsl(223, 10%, 25%));
+    }
+
+    .switch-inner {
+        box-shadow: 0 -4px 8px hsl(223, 10%, 20%) inset;
+    }
+
+    .switch-options {
+        box-shadow: 0 0 2px hsl(223, 10%, 50%) inset;
+    }
+
+    .switch-option {
+        text-shadow:
+            0 -1px 0 hsl(223, 10%, 10%),
+            0 1px 0 hsl(223, 10%, 50%);
+    }
+
+    .switch-option:last-child {
+        color: hsl(223, 10%, 20%);
+    }
+
+    .switch-separator {
+        background: linear-gradient(to bottom, transparent, hsl(223, 10%, 20%), transparent);
+        box-shadow: 1px 0 0 hsl(223, 10%, 50%);
+    }
+
+    .measurement-switch.imperial .switch-option {
+        color: hsl(223, 10%, 20%);
+    }
+
+    .switch-shadow,
+    .measurement-switch.imperial .switch-shadow:nth-child(2) {
+        box-shadow: 0 0 0 2px hsla(223, 10%, 10%, 0.9);
+    }
+
+    .switch-shadow:nth-child(2),
+    .measurement-switch.imperial .switch-shadow {
+        box-shadow: 0 0 8px 2px hsla(223, 10%, 10%, 0.9);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .measurement-toggle {
+        align-self: flex-end;
+    }
+    
+    .measurement-switch {
+        width: 120px;
+        height: 42px;
+        border-radius: 21px;
+    }
+    
+    .switch-inner {
+        inset: 6px;
+        border-radius: 17px;
+    }
+    
+    .switch-shadow {
+        top: 10px;
+        left: 10px;
+        width: 35px;
+        height: 20px;
+        transform-origin: 28px 10px;
+    }
+    
+    .switch-shadow:nth-child(2) {
+        right: 10px;
+        transform-origin: 14px 10px;
+    }
+    
+    .switch-option {
+        font-size: 0.7rem;
+    }
+    
+    .switch-separator {
+        height: 16px;
+    }
+}

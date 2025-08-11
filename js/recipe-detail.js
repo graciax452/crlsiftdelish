@@ -2,6 +2,157 @@
 console.log('Recipe detail page loaded');
 
 let currentRecipe = null;
+let isMetricMode = localStorage.getItem('measurement_preference') !== 'imperial'; // Default to metric unless explicitly set to imperial
+
+// Measurement conversion utilities
+const MeasurementConverter = {
+    // Conversion factors to metric
+    conversions: {
+        // Volume
+        'cup': { metric: 240, unit: 'ml' },
+        'cups': { metric: 240, unit: 'ml' },
+        'c': { metric: 240, unit: 'ml' },
+        'tbsp': { metric: 15, unit: 'ml' },
+        'tablespoon': { metric: 15, unit: 'ml' },
+        'tablespoons': { metric: 15, unit: 'ml' },
+        'tsp': { metric: 5, unit: 'ml' },
+        'teaspoon': { metric: 5, unit: 'ml' },
+        'teaspoons': { metric: 5, unit: 'ml' },
+        'fl oz': { metric: 29.5735, unit: 'ml' },
+        'fluid ounce': { metric: 29.5735, unit: 'ml' },
+        'fluid ounces': { metric: 29.5735, unit: 'ml' },
+        'pint': { metric: 473, unit: 'ml' },
+        'pints': { metric: 473, unit: 'ml' },
+        'quart': { metric: 946, unit: 'ml' },
+        'quarts': { metric: 946, unit: 'ml' },
+        
+        // Weight
+        'oz': { metric: 28.35, unit: 'g' },
+        'ounce': { metric: 28.35, unit: 'g' },
+        'ounces': { metric: 28.35, unit: 'g' },
+        'lb': { metric: 453.592, unit: 'g' },
+        'pound': { metric: 453.592, unit: 'g' },
+        'pounds': { metric: 453.592, unit: 'g' },
+        
+        // Temperature
+        'fahrenheit': { metric: null, unit: '°C' },
+        'f': { metric: null, unit: '°C' },
+        
+        // Length
+        'inch': { metric: 2.54, unit: 'cm' },
+        'inches': { metric: 2.54, unit: 'cm' },
+        'in': { metric: 2.54, unit: 'cm' }
+    },
+
+    convertToMetric(text) {
+        if (!text) return text;
+        
+        // Temperature conversion (°F to °C)
+        text = text.replace(/(\d+)°F/g, (match, temp) => {
+            const celsius = Math.round((parseInt(temp) - 32) * 5/9);
+            return `${celsius}°C`;
+        });
+        
+        // Pattern for measurements: number + unit
+        const measurementRegex = /(\d+(?:\/\d+)?(?:\.\d+)?)\s*([a-zA-Z\s]+)/g;
+        
+        return text.replace(measurementRegex, (match, amount, unit) => {
+            const normalizedUnit = unit.trim().toLowerCase();
+            const conversion = this.conversions[normalizedUnit];
+            
+            if (!conversion) return match;
+            
+            // Handle fractions
+            let numericAmount = amount;
+            if (amount.includes('/')) {
+                const [num, den] = amount.split('/');
+                numericAmount = parseFloat(num) / parseFloat(den);
+            } else {
+                numericAmount = parseFloat(amount);
+            }
+            
+            const convertedAmount = numericAmount * conversion.metric;
+            
+            // Format the result nicely
+            let formattedAmount;
+            if (convertedAmount >= 1000 && conversion.unit === 'ml') {
+                formattedAmount = (convertedAmount / 1000).toFixed(1).replace('.0', '');
+                return `${formattedAmount}L`;
+            } else if (convertedAmount >= 1000 && conversion.unit === 'g') {
+                formattedAmount = (convertedAmount / 1000).toFixed(2).replace(/\.?0+$/, '');
+                return `${formattedAmount}kg`;
+            } else {
+                formattedAmount = convertedAmount < 1 ? 
+                    convertedAmount.toFixed(2).replace(/\.?0+$/, '') : 
+                    Math.round(convertedAmount);
+                return `${formattedAmount}${conversion.unit}`;
+            }
+        });
+    },
+
+    convertToImperial(text) {
+        if (!text) return text;
+        
+        // This is more complex as we need to reverse conversions
+        // Temperature conversion (°C to °F)
+        text = text.replace(/(\d+)°C/g, (match, temp) => {
+            const fahrenheit = Math.round(parseInt(temp) * 9/5 + 32);
+            return `${fahrenheit}°F`;
+        });
+        
+        // Convert metric units back to imperial
+        // ml to cups/tbsp/tsp
+        text = text.replace(/(\d+(?:\.\d+)?)ml/g, (match, amount) => {
+            const ml = parseFloat(amount);
+            if (ml >= 240) {
+                const cups = (ml / 240).toFixed(2).replace(/\.?0+$/, '');
+                return `${cups} cup${cups !== '1' ? 's' : ''}`;
+            } else if (ml >= 15) {
+                const tbsp = (ml / 15).toFixed(1).replace(/\.?0+$/, '');
+                return `${tbsp} tbsp`;
+            } else {
+                const tsp = (ml / 5).toFixed(1).replace(/\.?0+$/, '');
+                return `${tsp} tsp`;
+            }
+        });
+        
+        // L to cups
+        text = text.replace(/(\d+(?:\.\d+)?)L/g, (match, amount) => {
+            const cups = (parseFloat(amount) * 1000 / 240).toFixed(2).replace(/\.?0+$/, '');
+            return `${cups} cups`;
+        });
+        
+        // g to oz/lb
+        text = text.replace(/(\d+(?:\.\d+)?)g/g, (match, amount) => {
+            const grams = parseFloat(amount);
+            if (grams >= 453) {
+                const lbs = (grams / 453.592).toFixed(2).replace(/\.?0+$/, '');
+                return `${lbs} lb${lbs !== '1' ? 's' : ''}`;
+            } else {
+                const oz = (grams / 28.35).toFixed(1).replace(/\.?0+$/, '');
+                return `${oz} oz`;
+            }
+        });
+        
+        // kg to lbs
+        text = text.replace(/(\d+(?:\.\d+)?)kg/g, (match, amount) => {
+            const lbs = (parseFloat(amount) * 2.20462).toFixed(2).replace(/\.?0+$/, '');
+            return `${lbs} lbs`;
+        });
+        
+        // cm to inches
+        text = text.replace(/(\d+(?:\.\d+)?)cm/g, (match, amount) => {
+            const inches = (parseFloat(amount) / 2.54).toFixed(1).replace(/\.?0+$/, '');
+            return `${inches} inch${inches !== '1' ? 'es' : ''}`;
+        });
+        
+        return text;
+    },
+
+    convertText(text, toMetric = true) {
+        return toMetric ? this.convertToMetric(text) : this.convertToImperial(text);
+    }
+};
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', async function() {
@@ -147,11 +298,26 @@ function displayRecipe(recipe) {
         
         <div class="recipe-content">
             <div class="ingredients-section">
-                <h2 class="section-title">
-                    <i class="fas fa-list"></i>
-                    Ingredients
-                </h2>
-                <div class="ingredients-list">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-list"></i>
+                        Ingredients
+                    </h2>
+                    <div class="measurement-toggle">
+                        <button class="measurement-switch ${isMetricMode ? 'metric' : 'imperial'}" id="measurement-switch" onclick="toggleMeasurements()">
+                            <div class="switch-inner">
+                                <div class="switch-options">
+                                    <div class="switch-option" data-mode="metric">Metric</div>
+                                    <div class="switch-separator"></div>
+                                    <div class="switch-option" data-mode="imperial">Imperial</div>
+                                </div>
+                            </div>
+                            <div class="switch-shadow"></div>
+                            <div class="switch-shadow"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="ingredients-list" id="ingredients-list">
                     ${groupIngredients(recipe.ingredients)}
                 </div>
             </div>
@@ -208,6 +374,67 @@ function toggleIngredient(checkElement) {
     }
 }
 
+// Set specific measurement mode (metric or imperial)
+function setMeasurementMode(mode) {
+    const newMetricMode = mode === 'metric';
+    
+    // Only update if mode actually changed
+    if (newMetricMode !== isMetricMode) {
+        isMetricMode = newMetricMode;
+        localStorage.setItem('measurement_preference', isMetricMode ? 'metric' : 'imperial');
+        
+        // Update toggle switch visual state
+        updateToggleVisualState();
+        
+        // Re-render ingredients and instructions with new measurements
+        updateRecipeDisplay();
+    }
+}
+
+// Toggle between metric and imperial measurements (for backward compatibility)
+function toggleMeasurements() {
+    setMeasurementMode(isMetricMode ? 'imperial' : 'metric');
+}
+
+// Update the visual state of the rocker switch
+function updateToggleVisualState() {
+    const measurementSwitch = document.getElementById('measurement-switch');
+    if (measurementSwitch) {
+        // Update the main switch class for rocker position
+        measurementSwitch.className = `measurement-switch ${isMetricMode ? 'metric' : 'imperial'}`;
+        
+        // Update option states
+        const metricOption = measurementSwitch.querySelector('[data-mode="metric"]');
+        const imperialOption = measurementSwitch.querySelector('[data-mode="imperial"]');
+        
+        if (metricOption && imperialOption) {
+            if (isMetricMode) {
+                metricOption.classList.add('active');
+                imperialOption.classList.remove('active');
+            } else {
+                metricOption.classList.remove('active');
+                imperialOption.classList.add('active');
+            }
+        }
+    }
+}
+
+// Update recipe display with current measurement preference
+function updateRecipeDisplay() {
+    if (currentRecipe) {
+        const ingredientsList = document.getElementById('ingredients-list');
+        const instructionsList = document.querySelector('.instructions-list');
+        
+        if (ingredientsList) {
+            ingredientsList.innerHTML = groupIngredients(currentRecipe.ingredients);
+        }
+        
+        if (instructionsList) {
+            instructionsList.innerHTML = groupInstructions(currentRecipe.instructions);
+        }
+    }
+}
+
 // Print recipe function
 function printRecipe() {
     if (!currentRecipe) {
@@ -233,7 +460,8 @@ function printRecipe() {
             } else if (ingredient.endsWith(':')) {
                 return `<li class="subheading"><strong>${ingredient}</strong></li>`;
             } else {
-                return `<li class="ingredient-item">☐ ${ingredient}</li>`;
+                const convertedIngredient = MeasurementConverter.convertText(ingredient, isMetricMode);
+                return `<li class="ingredient-item">☐ ${convertedIngredient}</li>`;
             }
         }).filter(item => item !== '').join('');
     }
@@ -247,7 +475,8 @@ function printRecipe() {
             } else if (instruction.endsWith(':')) {
                 return `<li class="subheading"><strong>${instruction}</strong></li>`;
             } else {
-                return `<li class="instruction-item"><span class="step-number">${stepNumber++}.</span> ${instruction}</li>`;
+                const convertedInstruction = MeasurementConverter.convertText(instruction, isMetricMode);
+                return `<li class="instruction-item"><span class="step-number">${stepNumber++}.</span> ${convertedInstruction}</li>`;
             }
         }).filter(item => item !== '').join('');
     }
@@ -425,8 +654,9 @@ function groupIngredients(ingredients) {
             // Start new section
             currentSection = { title: ingredient, items: [] };
         } else if (ingredient.trim() !== '') {
-            // Add ingredient to current section
-            currentSection.items.push(ingredient);
+            // Add ingredient to current section, convert measurements if needed
+            const convertedIngredient = MeasurementConverter.convertText(ingredient, isMetricMode);
+            currentSection.items.push(convertedIngredient);
         }
         // Skip empty lines
     }
@@ -435,7 +665,7 @@ function groupIngredients(ingredients) {
     if (currentSection.items.length > 0) {
         sections.push(currentSection);
     }
-    
+
     return sections.map(section => `
         <div class="ingredient-section">
             ${section.title ? `<div class="ingredient-section-title">${section.title}</div>` : ''}
@@ -483,8 +713,9 @@ function groupInstructions(instructions) {
             // Start new section
             currentSection = { title: instruction, items: [] };
         } else if (instruction.trim() !== '') {
-            // Add instruction to current section with step number
-            currentSection.items.push({ text: instruction, number: stepNumber++ });
+            // Add instruction to current section with step number, convert measurements if needed
+            const convertedInstruction = MeasurementConverter.convertText(instruction, isMetricMode);
+            currentSection.items.push({ text: convertedInstruction, number: stepNumber++ });
         }
         // Skip empty lines
     }
