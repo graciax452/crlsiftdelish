@@ -345,7 +345,16 @@ function groupIngredients(ingredients) {
     return sections.map(section => `
         <div class="ingredient-section">
             ${section.title ? `<div class="ingredient-section-title">${section.title}</div>` : ''}
-            ${section.items.map(item => `<div class="ingredient-item">${item}</div>`).join('')}
+            <ul class="ingredients-list">
+                ${section.items.map(item => `
+                    <li>
+                        <span class="ingredient-checkbox" onclick="toggleIngredient(this)">
+                            <i class="far fa-square"></i>
+                        </span>
+                        ${item}
+                    </li>
+                `).join('')}
+            </ul>
         </div>
     `).join('');
 }

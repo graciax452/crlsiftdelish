@@ -636,5 +636,28 @@ body {
     }
 }
 
+/* Ingredient Checkbox Styling */
+.ingredients-list li {
+    transition: var(--transition);
+}
 
+.ingredients-list li.checked {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: var(--text-light);
+}
 
+.ingredients-list li .ingredient-checkbox {
+    cursor: pointer;
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.ingredients-list li .ingredient-checkbox:hover {
+    color: var(--secondary-color);
+}
+
+.ingredients-list li.checked .ingredient-checkbox {
+    color: var(--secondary-color);
+}
