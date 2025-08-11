@@ -979,9 +979,17 @@ body {
     }
 }
 
+/* Tips and Notes Grid Container */
+.tips-notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
 /* Pro Tips Section Styling */
 .pro-tips-section {
-    margin-top: 2rem;
+    margin-top: 0; /* Grid container handles spacing */
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border-radius: var(--border-radius);
     padding: 2rem;
@@ -1047,7 +1055,7 @@ body {
 
 /* Recipe Notes Section Styling */
 .recipe-notes-section {
-    margin-top: 2rem;
+    margin-top: 0; /* Grid container handles spacing */
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border-radius: var(--border-radius);
     padding: 2rem;
@@ -1158,9 +1166,14 @@ body {
 
 /* Responsive Pro Tips and Recipe Notes */
 @media (max-width: 768px) {
+    .tips-notes-grid {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        gap: 1.5rem;
+    }
+    
     .pro-tips-section,
     .recipe-notes-section {
-        margin-top: 2rem;
+        margin-top: 0; /* Grid container handles spacing */
         padding: 1.5rem;
     }
     

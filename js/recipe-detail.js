@@ -350,45 +350,49 @@ function displayRecipe(recipe) {
                     </div>
                 </div>
             ` : ''}
-            
-            ${recipe.tips && recipe.tips.length > 0 ? `
-                <div class="pro-tips-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-lightbulb"></i>
-                        Pro Tips
-                    </h2>
-                    <div class="pro-tips-content">
-                        ${recipe.tips.map(tip => `
-                            <div class="pro-tip-item">
-                                <div class="pro-tip-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="pro-tip-text">${tip}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-            
-             ${recipe.notes && recipe.notes.length > 0 ? `
-                <div class="recipe-notes-section">
-                    <h2 class="section-title">
-                        <i class="fas fa-sticky-note"></i>
-                        Recipe Notes
-                    </h2>
-                    <div class="recipe-notes-content">
-                        ${recipe.notes.map(note => `
-                            <div class="recipe-note-item">
-                                <div class="note-icon">
-                                    <i class="fas fa-info-circle"></i>
-                                </div>
-                                <div class="note-text">${note}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
         </div>
+        
+        ${(recipe.tips && recipe.tips.length > 0) || (recipe.notes && recipe.notes.length > 0) ? `
+            <div class="tips-notes-grid">
+                ${recipe.tips && recipe.tips.length > 0 ? `
+                    <div class="pro-tips-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Pro Tips
+                        </h2>
+                        <div class="pro-tips-content">
+                            ${recipe.tips.map(tip => `
+                                <div class="pro-tip-item">
+                                    <div class="pro-tip-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="pro-tip-text">${tip}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+                
+                ${recipe.notes && recipe.notes.length > 0 ? `
+                    <div class="recipe-notes-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-sticky-note"></i>
+                            Recipe Notes
+                        </h2>
+                        <div class="recipe-notes-content">
+                            ${recipe.notes.map(note => `
+                                <div class="recipe-note-item">
+                                    <div class="note-icon">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="note-text">${note}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        ` : ''}
     `;
     
     console.log(`Recipe "${recipe.title}" displayed successfully`);
