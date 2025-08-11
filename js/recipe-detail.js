@@ -19,58 +19,26 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     console.log(`Looking for recipe with ID: ${recipeId}`);
     
-    // Wait for the working recipe system to be ready
-    await waitForWorkingRecipeSystem();
+    // Wait for recipe loader to be available
+    let attempts = 0;
+    while (!window.recipeLoader && attempts < 10) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+    }
+    
+    if (!window.recipeLoader) {
+        console.error('Recipe loader failed to initialize');
+        showError('Recipe system failed to load. Please refresh the page.');
+        return;
+    }
     
     // Load and display the recipe
     loadAndDisplayRecipe(parseInt(recipeId));
 });
 
-// Wait for the working recipe system to be ready
-async function waitForWorkingRecipeSystem() {
-    return new Promise((resolve) => {
-        let attempts = 0;
-        const maxAttempts = 20; // 10 seconds max wait
-        
-        const checkSystem = () => {
-            attempts++;
-            
-            // Check if basic system is ready
-            if (window.RecipeUtils && window.RECIPES_DATA) {
-                // Check if JSON replacement has occurred (look for real data, not "Loading...")
-                const hasRealData = window.RECIPES_DATA.some(recipe => 
-                    recipe.title && recipe.title !== "Loading..." && !recipe.title.includes("Loading")
-                );
-                
-                if (hasRealData) {
-                    console.log('Recipe system ready with JSON data');
-                    resolve();
-                    return;
-                }
-            }
-            
-            if (attempts >= maxAttempts) {
-                console.log('Timeout waiting for recipe system, proceeding anyway');
-                resolve();
-                return;
-            }
-            
-            // Try again in 500ms
-            setTimeout(checkSystem, 500);
-        };
-        
-        checkSystem();
-    });
-}
-
 // Load and display a specific recipe
 async function loadAndDisplayRecipe(recipeId) {
     try {
-        // Check if RecipeUtils is available
-        if (!window.RecipeUtils) {
-            throw new Error('Working recipe system not loaded');
-        }
-        
         // Show loading state
         const container = document.getElementById('recipe-container');
         if (container) {
@@ -81,9 +49,14 @@ async function loadAndDisplayRecipe(recipeId) {
                 </div>
             `;
         }
-        
-        // Get recipe from working system
-        currentRecipe = await RecipeUtils.getRecipeById(recipeId);
+
+        // Ensure recipe loader is available
+        if (!window.recipeLoader) {
+            throw new Error('Recipe loader not available');
+        }
+
+        // Get recipe directly
+        currentRecipe = await window.recipeLoader.getRecipeById(recipeId);
         
         if (!currentRecipe) {
             console.error(`Recipe with ID ${recipeId} not found`);
@@ -99,7 +72,7 @@ async function loadAndDisplayRecipe(recipeId) {
         
     } catch (error) {
         console.error('Error loading recipe:', error);
-        showError('Failed to load recipe. Please try again.');
+        showError('Failed to load recipe. Please refresh the page or try again.');
     }
 }
 

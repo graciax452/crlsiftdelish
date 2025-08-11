@@ -1,5 +1,4 @@
 // Recipe Website JavaScript
-console.log('Script.js loaded');
 
 // Recipe data container
 let recipes = [];
@@ -11,8 +10,6 @@ let navMenu;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('DOM loaded, initializing...');
-    
     // Get DOM elements
     recipeGrid = document.getElementById('recipe-grid');
     hamburger = document.querySelector('.hamburger');
@@ -24,76 +21,24 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     
     // Show loading
-    recipeGrid.innerHTML = '<div class="loading">Loading individual recipe files...</div>';
+    recipeGrid.innerHTML = '<div class="loading">Loading recipes...</div>';
     
-    // Check if recipes are already loaded
-    if (window.RECIPES_DATA && window.RECIPES_DATA.length > 0) {
-        console.log('🎉 Recipes already available, initializing immediately');
+    try {
+        // Load recipes directly
+        recipes = await window.recipeLoader.loadAllRecipes();
         await initializeApp();
-    } else {
-        console.log('⏳ Waiting for recipes to load...');
-        
-        // Listen for the recipes loaded event
-        window.addEventListener('recipesLoaded', async (event) => {
-            console.log('📨 Received recipesLoaded event:', event.detail);
-            if (event.detail.system === 'simple-individual') {
-                await initializeApp();
-            }
-        });
-        
-        // Fallback: try to initialize after delays
-        setTimeout(async () => {
-            console.log('🔄 Timeout 1: Checking for recipes...');
-            if (!recipes.length && window.RECIPES_DATA) {
-                await initializeApp();
-            }
-        }, 2000);
-        
-        setTimeout(async () => {
-            console.log('🔄 Timeout 2: Final check for recipes...');
-            if (!recipes.length) {
-                console.warn('⚠️ No recipes loaded after timeout, showing error');
-                recipeGrid.innerHTML = `
-                    <div class="error" style="text-align: center; padding: 2rem; color: #e53e3e;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                        <h3>No Recipes Loaded</h3>
-                        <p>The recipe system failed to load any recipes.</p>
-                        <button onclick="window.location.reload()" class="btn btn-primary" style="margin-top: 1rem;">
-                            <i class="fas fa-refresh"></i>
-                            Refresh Page
-                        </button>
-                    </div>
-                `;
-            }
-        }, 5000);
+    } catch (error) {
+        console.error('Failed to load recipes:', error);
+        recipeGrid.innerHTML = '<div class="error">Failed to load recipes. Please refresh the page.</div>';
     }
 });
 
 // Initialize the app once recipes are available
 async function initializeApp() {
     try {
-        console.log('🚀 Initializing app with simple individual system...');
-        console.log('🔍 window.RecipeUtils:', typeof window.RecipeUtils);
-        console.log('🔍 window.RECIPES_DATA:', window.RECIPES_DATA?.length || 'undefined');
-        
-        // Get recipes from the simple system
-        if (window.RecipeUtils) {
-            console.log('📚 Using RecipeUtils.getAllRecipes()');
-            recipes = await RecipeUtils.getAllRecipes();
-        } else if (window.RECIPES_DATA) {
-            console.log('📚 Using window.RECIPES_DATA directly');
-            recipes = window.RECIPES_DATA;
-        } else {
-            throw new Error('No recipe data source available');
-        }
-        
-        console.log('Recipes loaded:', recipes.map(r => r.title));
-        
         if (!recipes || recipes.length === 0) {
-            throw new Error('No recipes loaded from simple individual system');
+            throw new Error('No recipes loaded');
         }
-        
-        console.log(`📚 Loaded ${recipes.length} individual recipe files`);
         
         // Render everything
         await renderRecipes();
