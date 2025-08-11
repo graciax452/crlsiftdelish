@@ -1,49 +1,55 @@
 {
     "id": 5,
-    "title": "Chocolate Fudge",
-    "description": "Rich and creamy chocolate fudge made with just three simple ingredients - perfect for gifting or indulging.",
+    "title": "Simple Chocolate Fudge",
+    "description": "Indulge your sweet tooth and elevate your dessert game with my delectably Simple Fudge Recipe! This mouthwateringly creamy treat requires just three simple ingredients, with sweetened condensed milk taking center stage as the secret to its luscious texture.",
     "image": "images/chocolate-fudge.jpg",
-    "time": "2+ hours",
+    "time": "3+ hours",
     "difficulty": "Easy",
     "category": "Desserts",
-    "youtubeId": "dQw4w9WgXcQ",
-    "tags": ["chocolate", "fudge", "easy", "dessert", "gift", "condensed milk"],
-    "servings": 16,
+    "youtubeId": "72FB34E1zYs",
+    "tags": ["chocolate", "fudge", "easy", "dessert", "gift", "condensed milk", "3-ingredient"],
+    "servings": 8,
     "prepTime": "10 mins",
-    "cookTime": "2+ hours chilling",
+    "cookTime": "5 mins + 3 hours chilling",
     "ingredients": [
-        "340g semi-sweet chocolate chips",
-        "1 can condensed milk (≈400g)",
-        "5g vanilla extract"
+        "340g (1 cup) semi-sweet chocolate chips",
+        "1 can (300ml) sweetened condensed milk",
+        "2.5ml (1/2 tsp) vanilla extract (optional)"        
     ],
     "instructions": [
-        "Line an 8x8 inch pan with parchment paper, leaving overhang for easy removal.",
-        "In a heavy-bottomed saucepan, combine chocolate chips and condensed milk over low heat.",
-        "Stir constantly until chocolate is completely melted and mixture is smooth (about 5-7 minutes).",
-        "Remove from heat and stir in vanilla extract until well combined.",
-        "Pour mixture into prepared pan and spread evenly.",
-        "Refrigerate for at least 2 hours or until completely set.",
-        "Using parchment overhang, lift fudge from pan and cut into squares.",
-        "Store in airtight container in refrigerator."
+        "Line a 4x4 inch (10x10 cm) pan with parchment paper, leaving overhang for easy removal.",
+        "Add chocolate chips and condensed milk to a medium saucepan.",
+        "Place over low heat and cook, stirring constantly with a silicon spatula, until chocolate is melted and mixture is smooth and thick (about 5 to 10 minutes).",
+        "Remove from heat and stir in vanilla extract if using.",
+        "Scoop the chocolate mixture into your prepared pan and smooth with a spatula or back of a spoon.",
+        "Set aside to cool completely and set for about 3 hours, or chill for 2 hours.",
+        "When fudge has set, remove from pan by lifting the parchment using excess as handles. Peel off parchment and cut into squares with a sharp knife.",
+        "Enjoy immediately or wrap in parchment and store in airtight container."
     ],
     "tips": [
-        "Use low heat to prevent chocolate from seizing or burning",
-        "Stir constantly for smooth, even melting",
-        "Line pan well for easy removal and clean cuts"
+        "Use low heat - don't be tempted to crank it to medium heat to speed the process, or you risk overheating the chocolate and breaking the mixture",
+        "Use chopped bar chocolate instead of chips - it will melt more smoothly than chocolate chips, which have stabilizers to help them hold their shape",
+        "Stir constantly with a stiff silicone spatula for smooth, even melting and to prevent burning",
+        "For perfectly smooth cuts, warm your knife under hot water, then dry thoroughly before making slices",
+        "Get creative with add-ins: try toasted nuts, sprinkles, cookie bits, crushed peppermint candies, or dried fruit",
+        "Use cookie cutters to make seasonal shapes instead of cutting into squares",
+        "Make sure to use sweetened condensed milk, not evaporated milk - they're not interchangeable!"
     ],
     "notes": [
-        "This recipe works best with full-fat condensed milk for the richest texture",
-        "Can be customized with add-ins like nuts, dried fruit, or mini marshmallows",
-        "Fudge will keep in the refrigerator for up to 2 weeks when properly stored",
-        "For best results, let fudge come to room temperature before cutting"
+        "This recipe is scaled for 1 portion using 1 can condensed milk and smaller 4x4 inch (10x10 cm) pan",
+        "Amount of chocolate: if mailing it or taking it for a road trip, I recommend using 480g (17 oz) as it will be denser and hold better",
+        "You can store the fudge in an airtight container in the fridge for up to 2 weeks or in the freezer for up to 3 months",
+        "Use different types of chocolate: use milk chocolate chips, white chocolate chips, butterscotch chips, mint chips or other flavors",
+        "For flavor variations: add mint extract for peppermint fudge, or coffee extract for mocha fudge",
+        "Perfect canvas for mix-ins: 125ml (1/2 cup) toasted chopped walnuts or pecans work wonderfully"
     ],
     "nutrition": {
-        "calories": 185,
-        "fat": "7g",
-        "carbs": "32g",
-        "protein": "3g",
-        "sugar": "29g"
+        "calories": 325,
+        "fat": "16g",
+        "carbs": "47g",
+        "protein": "5g",
+        "sugar": "40g"
     },
-    "lastUpdated": "2025-08-09",
-    "version": "1.0"
+    "lastUpdated": "2025-08-11",
+    "version": "2.0"
 }
