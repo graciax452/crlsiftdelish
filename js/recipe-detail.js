@@ -215,6 +215,43 @@ function printRecipe() {
         return;
     }
     
+    // Helper function to build timing info
+    function buildTimingInfo() {
+        const timings = [];
+        if (currentRecipe.prepTime) timings.push(`Prep: ${currentRecipe.prepTime}`);
+        if (currentRecipe.restTime) timings.push(`Rest: ${currentRecipe.restTime}`);
+        if (currentRecipe.cookTime) timings.push(`Cook: ${currentRecipe.cookTime}`);
+        if (currentRecipe.time) timings.push(`Total: ${currentRecipe.time}`);
+        return timings.join(' | ');
+    }
+    
+    // Helper function to format ingredients with checkboxes and subheadings
+    function formatIngredients(ingredients) {
+        return ingredients.map(ingredient => {
+            if (ingredient.trim() === '') {
+                return ''; // Empty line - no bullet, no checkbox
+            } else if (ingredient.endsWith(':')) {
+                return `<li class="subheading"><strong>${ingredient}</strong></li>`;
+            } else {
+                return `<li class="ingredient-item">☐ ${ingredient}</li>`;
+            }
+        }).filter(item => item !== '').join('');
+    }
+    
+    // Helper function to format instructions with subheadings and numbering
+    function formatInstructions(instructions) {
+        let stepNumber = 1;
+        return instructions.map(instruction => {
+            if (instruction.trim() === '') {
+                return ''; // Empty line - no number
+            } else if (instruction.endsWith(':')) {
+                return `<li class="subheading"><strong>${instruction}</strong></li>`;
+            } else {
+                return `<li class="instruction-item"><span class="step-number">${stepNumber++}.</span> ${instruction}</li>`;
+            }
+        }).filter(item => item !== '').join('');
+    }
+    
     // Create a print-friendly version
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
@@ -223,39 +260,124 @@ function printRecipe() {
         <head>
             <title>${currentRecipe.title} - Recipe</title>
             <style>
-                body { font-family: Arial, sans-serif; margin: 20px; }
-                h1 { color: #333; border-bottom: 2px solid #667eea; }
-                .meta { margin: 10px 0; color: #666; }
-                .section { margin: 20px 0; }
-                .ingredients li, .instructions li { margin: 5px 0; }
-                .step-number { font-weight: bold; color: #667eea; }
-                @media print { body { margin: 0; } }
+                body { 
+                    font-family: Arial, sans-serif; 
+                    margin: 20px; 
+                    line-height: 1.6;
+                    color: #333;
+                }
+                h1 { 
+                    color: #333; 
+                    border-bottom: 2px solid #667eea; 
+                    padding-bottom: 10px;
+                }
+                .meta { 
+                    margin: 15px 0; 
+                    color: #666; 
+                    font-size: 14px;
+                    background: #f8f9fa;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+                .section { 
+                    margin: 25px 0; 
+                    page-break-inside: avoid;
+                }
+                .section h2 {
+                    color: #667eea;
+                    margin-bottom: 15px;
+                    font-size: 18px;
+                }
+                
+                /* Ingredients styling */
+                .ingredients {
+                    list-style: none;
+                    padding: 0;
+                }
+                .ingredients .ingredient-item {
+                    margin: 8px 0;
+                    padding-left: 0;
+                    font-size: 14px;
+                }
+                .ingredients .subheading {
+                    margin: 15px 0 8px 0;
+                    list-style: none;
+                    color: #667eea;
+                    font-size: 15px;
+                }
+                
+                /* Instructions styling */
+                .instructions {
+                    list-style: none;
+                    padding: 0;
+                    counter-reset: none;
+                }
+                .instructions .instruction-item {
+                    margin: 10px 0;
+                    padding-left: 0;
+                    font-size: 14px;
+                }
+                .instructions .subheading {
+                    margin: 20px 0 10px 0;
+                    list-style: none;
+                    color: #667eea;
+                    font-size: 15px;
+                }
+                .step-number { 
+                    font-weight: bold; 
+                    color: #667eea; 
+                    margin-right: 8px;
+                    min-width: 25px;
+                    display: inline-block;
+                }
+                
+                .description {
+                    font-style: italic;
+                    color: #666;
+                    margin: 10px 0;
+                }
+                
+                @media print { 
+                    body { margin: 15px; }
+                    .section { page-break-inside: avoid; }
+                }
             </style>
         </head>
         <body>
             <h1>${currentRecipe.title}</h1>
-            <p>${currentRecipe.description}</p>
+            <p class="description">${currentRecipe.description}</p>
+            
             <div class="meta">
-                <strong>Time:</strong> ${currentRecipe.time} | 
-                <strong>Difficulty:</strong> ${currentRecipe.difficulty}
+                <strong>⏱️ Timing:</strong> ${buildTimingInfo()}<br>
+                <strong>📊 Difficulty:</strong> ${currentRecipe.difficulty}<br>
+                <strong>🍽️ Servings:</strong> ${currentRecipe.servings || 'Not specified'}
             </div>
             
             <div class="section">
-                <h2>Ingredients</h2>
+                <h2>🥘 Ingredients</h2>
                 <ul class="ingredients">
-                    ${currentRecipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                    ${formatIngredients(currentRecipe.ingredients)}
                 </ul>
             </div>
             
             <div class="section">
-                <h2>Instructions</h2>
+                <h2>📝 Instructions</h2>
                 <ol class="instructions">
-                    ${currentRecipe.instructions.map(instruction => `<li>${instruction}</li>`).join('')}
+                    ${formatInstructions(currentRecipe.instructions)}
                 </ol>
             </div>
             
+            ${currentRecipe.tips && currentRecipe.tips.length > 0 ? `
             <div class="section">
-                <p><small>Recipe from Ctrl+Sift+Delish - ${window.location.origin}</small></p>
+                <h2>💡 Tips</h2>
+                <ul style="list-style-type: disc; padding-left: 20px;">
+                    ${currentRecipe.tips.map(tip => `<li style="margin: 5px 0;">${tip}</li>`).join('')}
+                </ul>
+            </div>` : ''}
+            
+            <div class="section" style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee;">
+                <p><small>📧 Recipe from <strong>Ctrl+Sift+Delish</strong> - ${window.location.origin}</small></p>
+                <p><small>🗓️ Printed on ${new Date().toLocaleDateString()}</small></p>
             </div>
         </body>
         </html>
