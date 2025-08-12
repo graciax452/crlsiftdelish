@@ -740,6 +740,7 @@ function groupInstructions(instructions) {
              instruction.includes('TANGZHONG') ||
              instruction.includes('DOUGH') ||
              instruction.includes('FILLING') ||
+             instruction.includes('FROSTING') ||
              instruction.includes('RISE') ||
              instruction.includes('BAKE') ||
              instruction.includes('ROLL') ||

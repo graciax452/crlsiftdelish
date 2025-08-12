@@ -4,7 +4,7 @@ class RecipeLoader {
         this.recipes = [];
         this.recipesLoaded = false;
         this.recipeFiles = [
-            { id: 1, filename: 'cinnamon-rolls' },
+            { id: 1, filename: 'tangzhong-cinnamon-rolls' },
             { id: 2, filename: 'homemade-focaccia-bread' },
             { id: 3, filename: 'apple-crisp' },
             { id: 4, filename: 'butter-scones' },
