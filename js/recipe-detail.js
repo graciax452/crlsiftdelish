@@ -1,4 +1,4 @@
-// Recipe Detail Page JavaScript
+﻿// Recipe Detail Page JavaScript
 console.log('Recipe detail page loaded');
 
 let currentRecipe = null;
@@ -35,8 +35,8 @@ const MeasurementConverter = {
         'pounds': { metric: 453.592, unit: 'g' },
         
         // Temperature
-        'fahrenheit': { metric: null, unit: '°C' },
-        'f': { metric: null, unit: '°C' },
+        'fahrenheit': { metric: null, unit: 'Â°C' },
+        'f': { metric: null, unit: 'Â°C' },
         
         // Length
         'inch': { metric: 2.54, unit: 'cm' },
@@ -47,10 +47,10 @@ const MeasurementConverter = {
     convertToMetric(text) {
         if (!text) return text;
         
-        // Temperature conversion (°F to °C)
-        text = text.replace(/(\d+)°F/g, (match, temp) => {
+        // Temperature conversion (Â°F to Â°C)
+        text = text.replace(/(\d+)Â°F/g, (match, temp) => {
             const celsius = Math.round((parseInt(temp) - 32) * 5/9);
-            return `${celsius}°C`;
+            return `${celsius}Â°C`;
         });
         
         // Pattern for measurements: number + unit
@@ -94,11 +94,11 @@ const MeasurementConverter = {
         if (!text) return text;
         
         // This is more complex as we need to reverse conversions
-        // Temperature conversion (°C to °F) - rounded to nearest 25°F for normal baking temperatures
-        text = text.replace(/(\d+)°C/g, (match, temp) => {
+        // Temperature conversion (Â°C to Â°F) - rounded to nearest 25Â°F for normal baking temperatures
+        text = text.replace(/(\d+)Â°C/g, (match, temp) => {
             const fahrenheit = parseInt(temp) * 9/5 + 32;
             const roundedFahrenheit = Math.round(fahrenheit / 25) * 25;
-            return `${roundedFahrenheit}°F`;
+            return `${roundedFahrenheit}Â°F`;
         });
         
         // Convert metric units back to imperial
@@ -244,6 +244,17 @@ function displayRecipe(recipe) {
         return;
     }
     
+    // Calculate nutrition dynamically if ingredients are available
+    if (recipe.ingredients && Array.isArray(recipe.ingredients) && typeof calculateRecipeNutrition === 'function') {
+        try {
+            recipe.nutrition = calculateRecipeNutrition(recipe.ingredients, recipe.servings || 1);
+            console.log('Calculated nutrition:', recipe.nutrition);
+        } catch (error) {
+            console.warn('Failed to calculate nutrition:', error);
+            // Keep any existing nutrition data if calculation fails
+        }
+    }
+    
     // Build the complete recipe HTML
     container.innerHTML = `
         <div class="recipe-header">
@@ -321,7 +332,34 @@ function displayRecipe(recipe) {
                 <div class="ingredients-list" id="ingredients-list">
                     ${groupIngredients(recipe.ingredients)}
                 </div>
+
+                 ${recipe.nutrition ? `
+                <div class="nutrition-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-pie"></i>
+                        Nutrition Information
+                    </h2>
+                    <div class="nutrition-content">
+                        ${createCaloriePieChart(recipe.nutrition.calories, recipe.nutrition)}
+                        <div class="nutrition-row" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 1em; margin: 0; padding: 0; font-size: min(0.82em, 2.8vw); white-space: nowrap; flex-wrap: nowrap;">
+                            <div class="serving-count" style="display: flex; align-items: center; color: #444; line-height: 1.05; margin: 0; padding: 0; font-size: inherit; white-space: nowrap;">
+                                <i class="fas fa-utensils" style="margin-right: 0.22em; color: #667eea; font-size: 1em;"></i>
+                                <span style="padding: 0; margin: 0; font-size: inherit; white-space: nowrap;">${recipe.servings} servings</span>
+                            </div>
+                            <div class="total-calories" style="display: flex; align-items: center; color: #444; line-height: 1.05; margin: 0; padding: 0; font-size: inherit; white-space: nowrap;">
+                                <i class="fas fa-fire" style="margin-right: 0.22em; color: orange; font-size: 1em;"></i>
+                                <span style="padding: 0; margin: 0; font-size: inherit; white-space: nowrap;">${recipe.nutrition.totalCalories ? recipe.nutrition.totalCalories : recipe.nutrition.calories * recipe.servings} cal/recipe</span>
+                            </div>
+                        </div>
+                        <div class="macro-breakdown" style="margin-top: 0; padding-top: 0;">
+                            ${createMacroBreakdown(recipe.nutrition)}
+                        </div>
+                    </div>
+                </div>
+            ` : ''}
             </div>
+            
+           
             
             <div class="instructions-section">
                 <h2 class="section-title">
@@ -504,7 +542,7 @@ function printRecipe() {
                 return `<li class="subheading"><strong>${ingredient}</strong></li>`;
             } else {
                 const convertedIngredient = MeasurementConverter.convertText(ingredient, isMetricMode);
-                return `<li class="ingredient-item">☐ ${convertedIngredient}</li>`;
+                return `<li class="ingredient-item">â˜ ${convertedIngredient}</li>`;
             }
         }).filter(item => item !== '').join('');
     }
@@ -620,20 +658,20 @@ function printRecipe() {
             <p class="description">${currentRecipe.description}</p>
             
             <div class="meta">
-                <strong>⏱️ Timing:</strong> ${buildTimingInfo()}<br>
-                <strong>📊 Difficulty:</strong> ${currentRecipe.difficulty}<br>
-                <strong>🍽️ Servings:</strong> ${currentRecipe.servings || 'Not specified'}
+                <strong>â±ï¸ Timing:</strong> ${buildTimingInfo()}<br>
+                <strong>ðŸ“Š Difficulty:</strong> ${currentRecipe.difficulty}<br>
+                <strong>ðŸ½ï¸ Servings:</strong> ${currentRecipe.servings || 'Not specified'}
             </div>
             
             <div class="section">
-                <h2>🥘 Ingredients</h2>
+                <h2>ðŸ¥˜ Ingredients</h2>
                 <ul class="ingredients">
                     ${formatIngredients(currentRecipe.ingredients)}
                 </ul>
             </div>
             
             <div class="section">
-                <h2>📝 Instructions</h2>
+                <h2>ðŸ“ Instructions</h2>
                 <ol class="instructions">
                     ${formatInstructions(currentRecipe.instructions)}
                 </ol>
@@ -641,15 +679,15 @@ function printRecipe() {
             
             ${currentRecipe.tips && currentRecipe.tips.length > 0 ? `
             <div class="section">
-                <h2>💡 Tips</h2>
+                <h2>ðŸ’¡ Tips</h2>
                 <ul style="list-style-type: disc; padding-left: 20px;">
                     ${currentRecipe.tips.map(tip => `<li style="margin: 5px 0;">${tip}</li>`).join('')}
                 </ul>
             </div>` : ''}
             
             <div class="section" style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee;">
-                <p><small>📧 Recipe from <strong>Ctrl+Sift+Delish</strong> - ${window.location.origin}</small></p>
-                <p><small>🗓️ Printed on ${new Date().toLocaleDateString()}</small></p>
+                <p><small>ðŸ“§ Recipe from <strong>Ctrl+Sift+Delish</strong> - ${window.location.origin}</small></p>
+                <p><small>ðŸ—“ï¸ Printed on ${new Date().toLocaleDateString()}</small></p>
             </div>
         </body>
         </html>
@@ -859,9 +897,439 @@ function groupInstructions(instructions) {
     `).join('');
 }
 
+// Create calorie pie chart showing macro breakdown
+function createCaloriePieChart(calories, nutrition) {
+    // Modernized, larger SVG donut chart
+    const carbsValue = parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, ''));
+    const proteinValue = parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, ''));
+    const fatValue = parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, ''));
+    const servings = nutrition.servings && nutrition.servings > 0 ? nutrition.servings : 1;
+    const caloriesPerServing = Math.round(calories);
+    const carbsCals = carbsValue * 4;
+    const proteinCals = proteinValue * 4;
+    const fatCals = fatValue * 9;
+    const otherCals = Math.max(0, caloriesPerServing - carbsCals - proteinCals - fatCals);
+    const macroData = [
+        { label: 'Carbs', value: carbsCals, color: '#4F8EF7' },
+        { label: 'Protein', value: proteinCals, color: '#5cb85c' },
+        { label: 'Fat', value: fatCals, color: '#FFB347' },
+        { label: 'Other', value: otherCals, color: '#A0AEC0' }
+    ].filter(m => m.value > 0);
+    const total = macroData.reduce((sum, m) => sum + m.value, 0);
+    let cumulative = 0;
+    const strokeWidth = 28;
+    const radius = 80;
+    const center = radius + strokeWidth / 2;
+    const svgSize = center * 2;
+    const circumference = 2 * Math.PI * radius;
+    // SVG donut segments with tooltips, NO drop shadow
+    const segmentSVG = macroData.map((m, i) => {
+        const percent = m.value / total;
+        const dashArray = `${percent * circumference} ${circumference}`;
+        const rotation = (cumulative / total) * 360 - 90;
+        cumulative += m.value;
+        return `
+            <circle
+                cx="${center}"
+                cy="${center}"
+                r="${radius}"
+                fill="none"
+                stroke="${m.color}"
+                stroke-width="${strokeWidth}"
+                stroke-dasharray="${dashArray}"
+                stroke-dashoffset="0"
+                transform="rotate(${rotation} ${center} ${center})"
+                stroke-linecap="round"
+                style="cursor: pointer; transition: stroke-width 0.2s;"
+                onmouseover="this.setAttribute('stroke-width', ${strokeWidth + 6});"
+                onmouseout="this.setAttribute('stroke-width', ${strokeWidth});"
+            >
+                <title>${m.label}: ${Math.round(m.value)} cal (${Math.round(percent * 100)}%)</title>
+            </circle>
+        `;
+    }).join('');
+    // Modern center text
+    return `
+        <svg class="calorie-donut" viewBox="0 0 ${svgSize} ${svgSize}" width="${svgSize}" height="${svgSize}" style="display:block; margin:0 auto;">
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="#f7fafc" stroke="#e2e8f0" stroke-width="${strokeWidth}" />
+            ${segmentSVG}
+            <text x="${center}" y="${center - 10}" text-anchor="middle" font-size="2.8em" font-weight="bold" fill="#222" style="font-family: 'Segoe UI', Arial, sans-serif;">${caloriesPerServing}</text>
+            <text x="${center}" y="${center + 32}" text-anchor="middle" font-size="1.25em" fill="#888" style="font-family: 'Segoe UI', Arial, sans-serif;">cal/serving</text>
+        </svg>
+    `;
+}
+
+// Create detailed macro breakdown with subcategories
+function createMacroBreakdown(nutrition) {
+    // Calculate calories from each macro
+    const carbsValue = parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, ''));
+    const proteinValue = parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, ''));
+    const fatValue = parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, ''));
+    const sugarValue = parseFloat(nutrition.sugar.toString().replace(/[^\d.]/g, ''));
+    const fiberValue = parseFloat(nutrition.fiber.toString().replace(/[^\d.]/g, ''));
+    
+    const carbsCals = carbsValue * 4;
+    const proteinCals = proteinValue * 4;
+    const fatCals = fatValue * 9;
+    const totalCals = carbsCals + proteinCals + fatCals;
+    
+    // Calculate calorie percentages of serving
+    const carbsCalPercent = Math.round((carbsCals / totalCals) * 100);
+    const proteinCalPercent = Math.round((proteinCals / totalCals) * 100);
+    const fatCalPercent = Math.round((fatCals / totalCals) * 100);
+    
+    // Fat breakdown (estimated values for demonstration)
+    const saturatedFat = fatValue * 0.4; // ~40% saturated
+    const transFat = fatValue * 0.02; // ~2% trans
+    const monounsaturatedFat = fatValue * 0.35; // ~35% mono
+    const polyunsaturatedFat = fatValue * 0.23; // ~23% poly
+    
+    return `
+        <div class="breakdown-section">
+            <div class="breakdown-list">
+                <div class="breakdown-item main-item carbs">
+                    <div class="item-line">
+                        <div class="item-icon" style="color:#e85463; font-size:2em;">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <span class="item-name">Carbohydrates</span>
+                        <span class="item-value">${carbsValue}<span class="unit">g</span></span>
+                        <span class="item-percent">${carbsCalPercent}%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #e85463; width: ${carbsCalPercent}%"></div>
+                    </div>
+                </div>
+                ${sugarValue > 0 ? `
+                    <div class="breakdown-item sub-item">
+                        <div class="item-line">
+                            <span class="item-name">Sugar</span>
+                            <span class="item-value">${sugarValue}<span class="unit">g</span></span>
+                            <span class="item-percent">${Math.round((sugarValue / carbsValue) * 100)}%</span>
+                        </div>
+                        <div class="line-graph">
+                            <div class="line-fill" style="background: #f67684; width: ${Math.round((sugarValue / carbsValue) * 100)}%"></div>
+                        </div>
+                    </div>
+                ` : ''}
+                ${fiberValue > 0 ? `
+                    <div class="breakdown-item sub-item">
+                        <div class="item-line">
+                            <span class="item-name">Fiber</span>
+                            <span class="item-value">${fiberValue}<span class="unit">g</span></span>
+                            <span class="item-percent">${Math.round((fiberValue / carbsValue) * 100)}%</span>
+                        </div>
+                        <div class="line-graph">
+                            <div class="line-fill" style="background: #f67684; width: ${Math.round((fiberValue / carbsValue) * 100)}%"></div>
+                        </div>
+                    </div>
+                ` : ''}
+                
+                <div class="breakdown-item main-item protein">
+                    <div class="item-line">
+                        <div class="item-icon" style="color:#5cb85c; font-size:2em;">
+                            <i class="fas fa-egg"></i>
+                        </div>
+                        <span class="item-name">Protein</span>
+                        <span class="item-value">${proteinValue}<span class="unit">g</span></span>
+                        <span class="item-percent">${proteinCalPercent}%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #5cb85c; width: ${proteinCalPercent}%"></div>
+                    </div>
+                </div>
+                
+                <div class="breakdown-item main-item fat">
+                    <div class="item-line">
+                        <div class="item-icon" style="color:#ffce3a; font-size:2em;">
+                            <i class="fas fa-bacon"></i>
+                        </div>
+                        <span class="item-name">Fat</span>
+                        <span class="item-value">${fatValue}<span class="unit">g</span></span>
+                        <span class="item-percent">${fatCalPercent}%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #ffce3a; width: ${fatCalPercent}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Saturated Fat</span>
+                        <span class="item-value">${saturatedFat.toFixed(1)}<span class="unit">g</span></span>
+                        <span class="item-percent">40%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #ffdc8c; width: 40%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Trans Fat</span>
+                        <span class="item-value">${transFat.toFixed(1)}<span class="unit">g</span></span>
+                        <span class="item-percent">2%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #ffdc8c; width: 2%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Monounsaturated</span>
+                        <span class="item-value">${monounsaturatedFat.toFixed(1)}<span class="unit">g</span></span>
+                        <span class="item-percent">35%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #ffdc8c; width: 35%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Polyunsaturated</span>
+                        <span class="item-value">${polyunsaturatedFat.toFixed(1)}<span class="unit">g</span></span>
+                        <span class="item-percent">23%</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #ffdc8c; width: 23%"></div>
+                    </div>
+                </div>
+                
+                <div class="breakdown-item main-item vitamins">
+                    <div class="item-line">
+                        <div class="item-icon" style="color:#5a6169; font-size:2em;">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <span class="item-name">Vitamins & Minerals</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #5a6169; width: ${Math.round((
+                            (parseFloat(nutrition.calcium || 0) / 1000) + 
+                            (parseFloat(nutrition.iron || 0) / 18) + 
+                            (parseFloat(nutrition.vitaminA || 0) / 900) + 
+                            (parseFloat(nutrition.vitaminC || 0) / 90) + 
+                            (parseFloat(nutrition.vitaminD || 0) / 20) + 
+                            (parseFloat(nutrition.vitaminE || 0) / 15) + 
+                            (parseFloat(nutrition.vitaminB6 || 0) / 1.3) + 
+                            (parseFloat(nutrition.vitaminB12 || 0) / 2.4) + 
+                            (parseFloat(nutrition.folate || 0) / 400) + 
+                            (parseFloat(nutrition.magnesium || 0) / 400) + 
+                            (parseFloat(nutrition.potassium || 0) / 4700) + 
+                            (parseFloat(nutrition.zinc || 0) / 11) + 
+                            (parseFloat(nutrition.phosphorus || 0) / 1250)
+                        ) / 13 * 100)}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Calcium</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.calcium || 0))}mg/1000mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.calcium || 0) / 1000) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.calcium || 0) / 1000) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Iron</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.iron || 0) * 10) / 10}mg/18mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.iron || 0) / 18) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.iron || 0) / 18) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin A</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminA || 0))}μg/900μg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminA || 0) / 900) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminA || 0) / 900) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin C</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminC || 0) * 10) / 10}mg/90mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminC || 0) / 90) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminC || 0) / 90) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin D</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminD || 0) * 10) / 10}μg/20μg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminD || 0) / 20) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminD || 0) / 20) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin E</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminE || 0) * 10) / 10}mg/15mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminE || 0) / 15) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminE || 0) / 15) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin B6</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminB6 || 0) * 100) / 100}mg/1.3mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminB6 || 0) / 1.3) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminB6 || 0) / 1.3) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Vitamin B12</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.vitaminB12 || 0) * 100) / 100}μg/2.4μg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.vitaminB12 || 0) / 2.4) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.vitaminB12 || 0) / 2.4) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Folate</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.folate || 0))}μg/400μg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.folate || 0) / 400) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.folate || 0) / 400) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Magnesium</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.magnesium || 0))}mg/400mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.magnesium || 0) / 400) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.magnesium || 0) / 400) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Potassium</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.potassium || 0))}mg/4700mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.potassium || 0) / 4700) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.potassium || 0) / 4700) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Zinc</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.zinc || 0) * 10) / 10}mg/11mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.zinc || 0) / 11) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.zinc || 0) / 11) * 100))}%"></div>
+                    </div>
+                </div>
+                <div class="breakdown-item sub-item">
+                    <div class="item-line">
+                        <span class="item-name">Phosphorus</span>
+                        <span class="item-value"><span class="dv-value">${Math.round(parseFloat(nutrition.phosphorus || 0))}mg/1250mg</span></span>
+                        <span class="item-percent">${Math.round((parseFloat(nutrition.phosphorus || 0) / 1250) * 100)}% DV</span>
+                    </div>
+                    <div class="line-graph">
+                        <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.phosphorus || 0) / 1250) * 100))}%"></div>
+                    </div>
+                </div>
+                ${nutrition.sodium ? `
+                    <div class="breakdown-item sub-item">
+                        <div class="item-line">
+                            <span class="item-name">Sodium</span>
+                            <span class="item-value"><span class="dv-value">${nutrition.sodium}/2300mg</span></span>
+                            <span class="item-percent">${Math.round((parseFloat(nutrition.sodium.toString().replace(/[^\d.]/g, '')) / 2300) * 100)}% DV</span>
+                        </div>
+                        <div class="line-graph">
+                            <div class="line-fill" style="background: #6c757d; width: ${Math.min(100, Math.round((parseFloat(nutrition.sodium.toString().replace(/[^\d.]/g, '')) / 2300) * 100))}%"></div>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+// Create macro item with circular progress bar
+function createMacroItem(type, label, value, dailyValue, unit = 'g') {
+    // Extract numeric value from string (e.g., "4g" -> 4)
+    const numericValue = parseFloat(value.toString().replace(/[^\d.]/g, ''));
+    
+    // Calculate percentage of daily value
+    const percentage = Math.min((numericValue / dailyValue) * 100, 100);
+    
+    // Calculate circle progress (circumference = 2Ï€r, r = 20)
+    const circumference = 2 * Math.PI * 20;
+    const strokeDasharray = `${(percentage / 100) * circumference} ${circumference}`;
+    
+    return `
+        <div class="macro-item">
+            <div class="macro-circle ${type}">
+                <svg viewBox="0 0 44 44">
+                    <circle class="bg-circle" cx="22" cy="22" r="20"></circle>
+                    <circle class="progress-circle" cx="22" cy="22" r="20" style="stroke-dasharray: ${strokeDasharray}"></circle>
+                </svg>
+                <div class="macro-percentage">${Math.round(percentage)}%</div>
+            </div>
+            <div class="macro-value">${numericValue}${unit}</div>
+            <div class="macro-label">${label}</div>
+        </div>
+    `;
+}
+
 // Export functions for global access
 window.toggleIngredient = toggleIngredient;
 window.printRecipe = printRecipe;
 window.goBack = goBack;
 
 console.log('Recipe detail script loaded successfully');
+
+// Create macro item with circular progress bar
+function createMacroItem(type, label, value, dailyValue, unit = 'g') {
+    // Extract numeric value from string (e.g., "4g" -> 4)
+    const numericValue = parseFloat(value.toString().replace(/[^\d.]/g, ''));
+    
+    // Calculate percentage of daily value
+    const percentage = Math.min((numericValue / dailyValue) * 100, 100);
+    
+    // Calculate circle progress (circumference = 2Ï€r, r = 20)
+    const circumference = 2 * Math.PI * 20;
+    const strokeDasharray = `${(percentage / 100) * circumference} ${circumference}`;
+    
+    return `
+        <div class="macro-item">
+            <div class="macro-circle ${type}">
+                <svg viewBox="0 0 44 44">
+                    <circle class="bg-circle" cx="22" cy="22" r="20"></circle>
+                    <circle class="progress-circle" cx="22" cy="22" r="20" style="stroke-dasharray: ${strokeDasharray}"></circle>
+                </svg>
+                <div class="macro-percentage">${Math.round(percentage)}%</div>
+            </div>
+            <div class="macro-value">${numericValue}${unit}</div>
+            <div class="macro-label">${label}</div>
+        </div>
+    `;
+}
+
+// Export functions for global access
+window.toggleIngredient = toggleIngredient;
+window.printRecipe = printRecipe;
+window.goBack = goBack;
+
+console.log('Recipe detail script loaded successfully');
+
