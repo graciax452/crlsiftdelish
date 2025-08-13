@@ -398,6 +398,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    align-items: stretch; /* Ensure all cards in a row have the same height */
 }
 
 .recipe-card {
@@ -407,6 +408,8 @@ body {
     overflow: hidden;
     transition: var(--transition);
     cursor: pointer;
+    display: flex;
+    flex-direction: column; /* Allow content to stretch and fill card */
 }
 
 .recipe-card:hover {
@@ -427,6 +430,9 @@ body {
 
 .recipe-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow content to expand and fill available space */
 }
 
 .recipe-title {
@@ -436,10 +442,18 @@ body {
     margin-bottom: 0.5rem;
 }
 
-.recipe-description {
+.recipe-card .recipe-description {
     color: var(--text-light);
     margin-bottom: 1rem;
     font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1; /* Allow description area to expand and push meta/actions to bottom */
+    height: 4.5em; /* Fixed height for exactly 3 lines (1.5 line-height × 3 lines) */
+    overflow: hidden; /* Hide any overflow text */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    line-clamp: 3; /* Standard property for compatibility */
+    -webkit-box-orient: vertical;
 }
 
 .recipe-meta {

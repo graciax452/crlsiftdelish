@@ -93,6 +93,28 @@ async function renderRecipes() {
     });
 }
 
+// Helper function to truncate description to fit within 3 lines of text
+function truncateDescription(description, maxLength = 150) {
+    if (!description) return '';
+    
+    // If the description is already short enough, return it as is
+    if (description.length <= maxLength) {
+        return description;
+    }
+    
+    // Truncate to maxLength and find the last complete word
+    let truncated = description.substring(0, maxLength);
+    const lastSpaceIndex = truncated.lastIndexOf(' ');
+    
+    // If we found a space, cut at the last complete word
+    if (lastSpaceIndex > 0) {
+        truncated = truncated.substring(0, lastSpaceIndex);
+    }
+    
+    // Add ellipsis
+    return truncated.trim() + '...';
+}
+
 // Create a recipe card element - PAGE NAVIGATION ONLY
 function createRecipeCard(recipe) {
     const card = document.createElement('div');
@@ -103,7 +125,7 @@ function createRecipeCard(recipe) {
         <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image" onclick="viewRecipePage(${recipe.id})" style="cursor: pointer;">
         <div class="recipe-content">
             <h3 class="recipe-title">${recipe.title}</h3>
-            <p class="recipe-description">${recipe.description}</p>
+            <p class="recipe-description">${truncateDescription(recipe.description)}</p>
             <div class="recipe-meta">
                 <span class="recipe-time">
                     <i class="fas fa-clock"></i>
