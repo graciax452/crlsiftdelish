@@ -910,9 +910,9 @@ function createCaloriePieChart(calories, nutrition) {
     const fatCals = fatValue * 9;
     const otherCals = Math.max(0, caloriesPerServing - carbsCals - proteinCals - fatCals);
     const macroData = [
-        { label: 'Carbs', value: carbsCals, color: '#4F8EF7' },
+        { label: 'Carbs', value: carbsCals, color: '#e85463' }, // match macro section
         { label: 'Protein', value: proteinCals, color: '#5cb85c' },
-        { label: 'Fat', value: fatCals, color: '#FFB347' },
+        { label: 'Fat', value: fatCals, color: '#ffce3a' },
         { label: 'Other', value: otherCals, color: '#A0AEC0' }
     ].filter(m => m.value > 0);
     const total = macroData.reduce((sum, m) => sum + m.value, 0);
@@ -948,10 +948,10 @@ function createCaloriePieChart(calories, nutrition) {
             </circle>
         `;
     }).join('');
-    // Modern center text
+    // Modern center text, no background color
     return `
         <svg class="calorie-donut" viewBox="0 0 ${svgSize} ${svgSize}" width="${svgSize}" height="${svgSize}" style="display:block; margin:0 auto;">
-            <circle cx="${center}" cy="${center}" r="${radius}" fill="#f7fafc" stroke="#e2e8f0" stroke-width="${strokeWidth}" />
+            <circle cx="${center}" cy="${center}" r="${radius}" fill="none" stroke="#e2e8f0" stroke-width="${strokeWidth}" />
             ${segmentSVG}
             <text x="${center}" y="${center - 10}" text-anchor="middle" font-size="2.8em" font-weight="bold" fill="#222" style="font-family: 'Segoe UI', Arial, sans-serif;">${caloriesPerServing}</text>
             <text x="${center}" y="${center + 32}" text-anchor="middle" font-size="1.25em" fill="#888" style="font-family: 'Segoe UI', Arial, sans-serif;">cal/serving</text>
