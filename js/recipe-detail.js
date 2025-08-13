@@ -94,10 +94,11 @@ const MeasurementConverter = {
         if (!text) return text;
         
         // This is more complex as we need to reverse conversions
-        // Temperature conversion (°C to °F)
+        // Temperature conversion (°C to °F) - rounded to nearest 25°F for normal baking temperatures
         text = text.replace(/(\d+)°C/g, (match, temp) => {
-            const fahrenheit = Math.round(parseInt(temp) * 9/5 + 32);
-            return `${fahrenheit}°F`;
+            const fahrenheit = parseInt(temp) * 9/5 + 32;
+            const roundedFahrenheit = Math.round(fahrenheit / 25) * 25;
+            return `${roundedFahrenheit}°F`;
         });
         
         // Convert metric units back to imperial
