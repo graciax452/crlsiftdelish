@@ -230,7 +230,6 @@ body {
             background: none;
             box-sizing: border-box;
             overflow-x: hidden;
-        }
         .recipe-header,
         .recipe-content {
             grid-template-columns: 1fr !important;
@@ -680,6 +679,71 @@ body {
         gap: 1.5rem;
     }
 }
+
+    /* Mobile full-width fixes for tips, notes, and footer */
+    @media (max-width: 480px) {
+        .tips-notes-grid {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
+            box-sizing: border-box !important;
+        }
+
+        .pro-tips-section,
+        .recipe-notes-section {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            position: relative !important;
+            left: 0 !important;
+            transform: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            background: none !important;
+            box-sizing: border-box !important;
+            margin-bottom: 2.5rem !important;
+        }
+
+        .measurement-toggle,
+        .section-header {
+            padding-right: 2rem !important;
+        }
+
+        html, body {
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100vw !important;
+            overflow-x: hidden !important;
+        }
+        .footer {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            position: static !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            transform: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            background: var(--text-dark) !important;
+            text-align: center !important;
+        }
+        }
+        .footer .container {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
 
 /* Ingredient Checkbox Styling */
 .ingredients-list li {
