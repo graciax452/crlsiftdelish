@@ -1,0 +1,99 @@
+.instructions-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .instruction-section {
+            background: white;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .instruction-section-title {
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .instruction-item {
+            padding: 0.8rem 0;
+            color: #2d3748;
+            line-height: 1.6;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .instruction-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Alternative Methods Styling */
+        .alternative-methods {
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .alternative-methods-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .method-column {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .method-column .instruction-section-title {
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 0.5rem;
+        }
+
+        .method-column .instruction-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .method-column .step-number {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        }
+
+        
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        /* Mobile responsive for alternative methods */
+        @media (max-width: 768px) {
+            .alternative-methods-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 600px) {
+                
+                .instructions-section {
+                    width: 100vw !important;
+                    max-width: 100vw !important;
+                    margin: 0 !important;
+                    padding: 0.5rem !important;
+                    border-radius: 0 !important;
+                    box-shadow: none !important;
+                    background: none !important;
+                }
+            }

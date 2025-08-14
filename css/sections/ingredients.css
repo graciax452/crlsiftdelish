@@ -1,0 +1,76 @@
+/* Ingredient Checkbox Styling */
+.ingredients-list li {
+    transition: var(--transition);
+}
+
+.ingredients-list li.checked {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: var(--text-light);
+}
+
+.ingredients-list li .ingredient-checkbox {
+    cursor: pointer;
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.ingredients-list li .ingredient-checkbox:hover {
+    color: var(--secondary-color);
+}
+
+.ingredients-list li.checked .ingredient-checkbox {
+    color: var(--secondary-color);
+}
+
+.ingredients-section,
+        .instructions-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+.ingredients-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredient-section {
+            background: white;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .ingredient-section-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .ingredient-item {
+            padding: 0.3rem 0;
+            color: #2d3748;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .ingredient-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 600px) {
+                
+                .ingredients-section{
+                    width: 100vw !important;
+                    max-width: 100vw !important;
+                    margin: 0 !important;
+                    padding: 0.5rem !important;
+                    border-radius: 0 !important;
+                    box-shadow: none !important;
+                    background: none !important;
+                }
+            }
