@@ -13,6 +13,9 @@
     "cookTime": "25 mins",
     "chillTime": "2 hours",
     "totalTime": "2 hours 40 mins",
+    "lastUpdated": "2025-08-12",
+    "version": "2.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "300ml Carnation Condensed Milk (equivalent to 397g can)",
         "450g light brown soft sugar",
@@ -79,8 +82,5 @@
         "TEXTURE PREFERENCE: Light brown soft sugar is specifically chosen for the best texture, color, and flavor - avoid substituting for optimal results.",
         "EQUIPMENT MATTERS: Use block butter (not margarine) and double cream for the proper fat content that ensures perfect setting every time.",
         "TRUST THE PROCESS: Be patient during the beating stage - it takes time but the magical transformation is absolutely worth it!"
-    ],
-    
-    "lastUpdated": "2025-08-12",
-    "version": "2.0"
+    ]    
 }

@@ -35,8 +35,8 @@ const MeasurementConverter = {
         'pounds': { metric: 453.592, unit: 'g' },
         
         // Temperature
-        'fahrenheit': { metric: null, unit: 'Â°C' },
-        'f': { metric: null, unit: 'Â°C' },
+        'fahrenheit': { metric: null, unit: '°C' },
+        'f': { metric: null, unit: '°C' },
         
         // Length
         'inch': { metric: 2.54, unit: 'cm' },
@@ -47,10 +47,10 @@ const MeasurementConverter = {
     convertToMetric(text) {
         if (!text) return text;
         
-        // Temperature conversion (Â°F to Â°C)
-        text = text.replace(/(\d+)Â°F/g, (match, temp) => {
+        // Temperature conversion (°F to °C)
+        text = text.replace(/(\d+)°F/g, (match, temp) => {
             const celsius = Math.round((parseInt(temp) - 32) * 5/9);
-            return `${celsius}Â°C`;
+            return `${celsius}°C`;
         });
         
         // Pattern for measurements: number + unit
@@ -94,11 +94,11 @@ const MeasurementConverter = {
         if (!text) return text;
         
         // This is more complex as we need to reverse conversions
-        // Temperature conversion (Â°C to Â°F) - rounded to nearest 25Â°F for normal baking temperatures
-        text = text.replace(/(\d+)Â°C/g, (match, temp) => {
+        // Temperature conversion (°C to °F) - rounded to nearest 25°F for normal baking temperatures
+        text = text.replace(/(\d+)°C/g, (match, temp) => {
             const fahrenheit = parseInt(temp) * 9/5 + 32;
             const roundedFahrenheit = Math.round(fahrenheit / 25) * 25;
-            return `${roundedFahrenheit}Â°F`;
+            return `${roundedFahrenheit}°F`;
         });
         
         // Convert metric units back to imperial
@@ -141,10 +141,19 @@ const MeasurementConverter = {
             return `${lbs} lbs`;
         });
         
-        // cm to inches
+        // cm to inches (round to nearest quarter inch, display as e.g. '9-inch')
         text = text.replace(/(\d+(?:\.\d+)?)cm/g, (match, amount) => {
-            const inches = (parseFloat(amount) / 2.54).toFixed(1).replace(/\.?0+$/, '');
-            return `${inches} inch${inches !== '1' ? 'es' : ''}`;
+            const rawInches = parseFloat(amount) / 2.54;
+            // Round to nearest quarter inch
+            const roundedInches = Math.round(rawInches * 4) / 4;
+            // If close to a whole number, display as '9-inch', else '9.25-inch', etc.
+            let display;
+            if (Math.abs(roundedInches - Math.round(roundedInches)) < 0.15) {
+                display = `${Math.round(roundedInches)}-inch`;
+            } else {
+                display = `${roundedInches.toFixed(2).replace(/\.00$/, '')}-inch`;
+            }
+            return display;
         });
         
         return text;

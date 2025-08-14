@@ -12,19 +12,22 @@
     "prepTime": "20 mins",
     "cookTime": "15 mins",
     "totalTime": "35 mins",
+    "lastUpdated": "2025-08-12",
+    "version": "2.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "For the Scones:",
-        "350 g all-purpose flour, plus extra for dusting",
-        "50 g caster sugar",
+        "350g all-purpose flour, plus extra for dusting",
+        "50g caster sugar",
         "2 tsp baking powder (8g)",
         "1 tsp salt (4g)",
-        "110 g cold unsalted butter, cubed",
+        "110g cold unsalted butter, cubed",
         "1 large egg (or see egg-free variation in notes)",
-        "200 ml whole milk",
+        "200ml whole milk",
         "1 tsp vanilla extract (5ml)",
         "",
         "For Glazing:",
-        "2 tbsp whole milk",
+        "2 tbsp whole milk (30ml)",
         "",
         "For Serving (Traditional Cream Tea):",
         "Strawberry or raspberry jam",
@@ -85,8 +88,5 @@
         "VARIATIONS: Add 75g sultanas or dried fruit for delightful fruit scones, or try savory versions with cheese and fresh herbs for something completely different.",
         "CUTTING TECHNIQUE: A sharp cutter is absolutely essential since dull edges compress the dough and prevent that beautiful, tall rise.",
         "BAKING POWDER WARNING: Never use more than 2 teaspoons of baking powder with this amount of flour, as excess causes bitter taste and unpleasant over-rising."
-    ],
-    
-    "lastUpdated": "2025-08-12",
-    "version": "2.0"
+    ]    
 }

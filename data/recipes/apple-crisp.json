@@ -12,29 +12,32 @@
     "prepTime": "20 mins",
     "cookTime": "45 mins",
     "totalTime": "1 hour 5 mins",
+    "lastUpdated": "2025-08-12",
+    "version": "2.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "For the Apple Filling:",
-        "1 kg firm-crisp apples (6-7 medium apples), peeled and sliced",
-        "15 ml fresh lemon juice",
-        "85 g granulated sugar (or to taste)",
-        "15 g all-purpose flour",
+        "1kg firm-crisp apples (6-7 medium apples), peeled and sliced",
+        "15ml fresh lemon juice",
+        "85g granulated sugar (or to taste)",
+        "15g all-purpose flour",
         "1 tsp ground cinnamon",        
         "",
         "For the Crumb/Crisp Topping:",
-        "140 g all-purpose flour",
-        "55 g soft brown sugar (demerara)",
-        "20 g granulated sugar",
+        "140g all-purpose flour",
+        "55g soft brown sugar (demerara)",
+        "20g granulated sugar",
         "1.5 tsp ground cinnamon",
         "0.75 tsp salt",
-        "110 g unsalted butter (room temperature), plus extra for pan",
-        "40 g old-fashioned rolled oats"
+        "110g unsalted butter (room temperature), plus extra for pan",
+        "40g old-fashioned rolled oats"
     ],
     "instructions": [
-    "Generously butter a 23 cm pie pan with a bit of extra butter and preheat your oven to 190°C. The buttered dish will help prevent sticking and make serving easier.",
+    "Generously butter a 23cm pie pan with a bit of extra butter and preheat your oven to 190°C. The buttered dish will help prevent sticking and make serving easier.",
     "",
     "APPLE PREPARATION:",
-    "Peel, core, and thinly slice your apples to 6 mm thickness using an apple peeler for efficiency. You should have about 7-8 cups of beautiful sliced apples when finished.",
-    "Transfer the sliced apples to a large bowl and squeeze 15ml (1 tablespoon) of fresh lemon juice over them, tossing gently to coat. This prevents browning and adds a lovely bright flavor that balances the sweetness.",
+    "Peel, core, and thinly slice your apples. You should have about 7-8 cups of beautiful sliced apples when finished.",
+    "Transfer the sliced apples to a large bowl and squeeze 15ml of fresh lemon juice over them, tossing gently to coat. This prevents browning and adds a lovely bright flavor that balances the sweetness.",
     "Toss to combine, giving your apples an extra layer of warm, sweet flavor.",
     "",
     "COATING THE APPLES:",
@@ -73,9 +76,6 @@
         "VARIATIONS: Add fresh or dried cranberries, experiment with spices like nutmeg or candied ginger, or create a gluten-free version using your favorite flour substitute.",
         "DIFFERENCE FROM OTHER DESSERTS: Apple crisp has a crunchy oat-based topping, while apple crumble is flour-based with sandier texture, and apple cobbler has biscuit-like topping.",
         "SEASONAL TIP: This recipe is perfect for apple picking season and the smaller size makes it ideal for family dinners and smaller gatherings.",
-        "PIE PAN PERFECT: This 23 cm pie pan size serves 8 people generously, making it perfect for family desserts and intimate dinner parties."
-    ],
-    
-    "lastUpdated": "2025-08-12",
-    "version": "2.0"
+        "PIE PAN PERFECT: This 23cm pie pan size serves 8 people generously, making it perfect for family desserts and intimate dinner parties."
+    ]    
 }

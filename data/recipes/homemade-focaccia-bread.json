@@ -14,6 +14,7 @@
     "cookTime": "25-30 mins",
     "lastUpdated": "2025-08-12",
     "version": "2.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "For the Dough (4 ingredients only!):",
         "256g  all-purpose or bread flour",

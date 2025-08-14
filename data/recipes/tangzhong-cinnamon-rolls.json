@@ -14,6 +14,7 @@
     "cookTime": "25 mins",
     "lastUpdated": "2025-08-11",
     "version": "2.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "For Tangzhong (Night Before):",
         "25g all-purpose flour",

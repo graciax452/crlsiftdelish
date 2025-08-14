@@ -13,16 +13,19 @@
     "cookTime": "5 mins",
     "chillTime": "3 hours",
     "totalTime": "3 hours 15 mins",
+    "lastUpdated": "2025-08-12",
+    "version": "3.0",
+    "defaultUnits": "metric",
     "ingredients": [
         "360g semi-sweet chocolate chips (or chopped chocolate)",
-        "1 can (300ml) sweetened condensed milk", 
+        "1 can (300ml/397g) condensed milk", 
         "(optional) 1 tsp vanilla extract"
     ],
     "instructions": [
         "Line a 15×10 cm rectangular baking dish with parchment paper, ensuring the bottom and sides are completely covered and excess hangs over the edges for easy removal.",
         "",
         "MELTING THE CHOCOLATE:",
-        "Add the chocolate chips and sweetened condensed milk to a medium saucepan.",
+        "Add the chocolate chips and condensed milk to a medium saucepan.",
         "Place over low heat and cook, stirring constantly with a wooden spoon, until the chocolate melts completely and the mixture becomes smooth and thick, approximately 5 minutes.",
         "Remove from heat and gently stir in the vanilla extract if you're using it.",
         "",
@@ -61,8 +64,5 @@
         "PERFECT FOR GIFTING: This delicious fudge makes wonderful homemade gifts during the holiday season or for any special occasion throughout the year.",
         "KITCHEN NOVICE FRIENDLY: This foolproof recipe promises perfectly creamy fudge with hassle-free preparation that even complete beginners can master with confidence.",
         "PAN SIZE FLEXIBILITY: Use any similar-sized small pan for this recipe - a 15×10 cm rectangular dish provides the ideal thickness for cutting into perfectly proportioned squares."
-    ],
-    
-    "lastUpdated": "2025-08-12",
-    "version": "3.0"
+    ]    
 }
