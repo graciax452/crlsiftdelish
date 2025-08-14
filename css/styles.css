@@ -205,7 +205,38 @@ body {
 }
 
 .tagline {
+
     margin: 0.5rem 0;
+
+/* Fix mobile alignment for recipe-detail */
+@media (max-width: 600px) {
+    .recipe-detail {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+        .recipe-container,
+        .ingredients-section,
+        .instructions-section,
+        .nutrition-section {
+            width: 94vw;
+            max-width: 94vw;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.5rem;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .recipe-header,
+        .recipe-content {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+        }
+}
     font-family: 'Courier New', monospace;
 }
 

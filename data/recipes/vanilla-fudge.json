@@ -80,15 +80,7 @@
         "EQUIPMENT MATTERS: Use block butter (not margarine) and double cream for the proper fat content that ensures perfect setting every time.",
         "TRUST THE PROCESS: Be patient during the beating stage - it takes time but the magical transformation is absolutely worth it!"
     ],
-    "nutrition": {
-        "calories": 165,
-        "fat": "4g",
-        "carbs": "32g",
-        "protein": "2g",
-        "sugar": "30g",
-        "fiber": "0g",
-        "sodium": "25mg"
-    },
+    
     "lastUpdated": "2025-08-12",
     "version": "2.0"
 }

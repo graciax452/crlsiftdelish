@@ -975,7 +975,18 @@ function estimateFromFoodType(ingredientName) {
 // Calculate nutrition for entire recipe
 function calculateRecipeNutrition(ingredients, servings = 1) {
     console.log('Calculating nutrition for ingredients:', ingredients);
-    console.log('Servings:', servings);
+    // Parse servings as a number if possible
+    let servingsNum = 1;
+    if (typeof servings === 'string') {
+        // Try to extract the first number from the string
+        const match = servings.match(/\d+/);
+        if (match) {
+            servingsNum = parseInt(match[0], 10);
+        }
+    } else if (typeof servings === 'number') {
+        servingsNum = servings;
+    }
+    console.log('Servings:', servingsNum);
     
     const totalNutrition = {
         calories: 0,
@@ -1008,6 +1019,10 @@ function calculateRecipeNutrition(ingredients, servings = 1) {
         }
         
         console.log('Parsed ingredient:', parsed);
+        // Log nutrition DB lookup
+        const dbKeys = Object.keys(INGREDIENT_NUTRITION_DB);
+        const matchKey = dbKeys.find(k => parsed.name.includes(k));
+        console.log('Ingredient DB match:', matchKey);
         
         const weightInGrams = convertToGrams(parsed.quantity, parsed.unit, parsed.name);
         const nutritionData = findNutritionData(parsed.name);
@@ -1028,12 +1043,14 @@ function calculateRecipeNutrition(ingredients, servings = 1) {
     // Calculate per serving
     const perServing = {};
     Object.keys(totalNutrition).forEach(nutrient => {
-        const value = totalNutrition[nutrient] / servings;
+        const value = totalNutrition[nutrient] / servingsNum;
         if (nutrient === 'sodium') {
             perServing[nutrient] = `${Math.round(value)}mg`;
         } else if (nutrient === 'calories') {
             perServing[nutrient] = Math.round(value);
-        } else if (['calcium', 'iron', 'vitaminA', 'vitaminC', 'vitaminD', 'vitaminE', 'vitaminB6', 'vitaminB12', 'folate', 'magnesium', 'potassium', 'zinc', 'phosphorus'].includes(nutrient)) {
+        } else if ([
+            'calcium', 'iron', 'vitaminA', 'vitaminC', 'vitaminD', 'vitaminE', 'vitaminB6', 'vitaminB12', 'folate', 'magnesium', 'potassium', 'zinc', 'phosphorus'
+        ].includes(nutrient)) {
             // Keep micronutrients as numbers for easier calculation
             perServing[nutrient] = Math.round(value * 10) / 10;
         } else {

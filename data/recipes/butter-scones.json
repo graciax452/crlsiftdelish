@@ -86,15 +86,7 @@
         "CUTTING TECHNIQUE: A sharp cutter is absolutely essential since dull edges compress the dough and prevent that beautiful, tall rise.",
         "BAKING POWDER WARNING: Never use more than 2 teaspoons of baking powder with this amount of flour, as excess causes bitter taste and unpleasant over-rising."
     ],
-    "nutrition": {
-        "calories": 285,
-        "fat": "12g",
-        "carbs": "42g",
-        "protein": "7g",
-        "sugar": "8g",
-        "fiber": "2g",
-        "sodium": "320mg"
-    },
+    
     "lastUpdated": "2025-08-12",
     "version": "2.0"
 }

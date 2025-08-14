@@ -247,7 +247,11 @@ function displayRecipe(recipe) {
     // Calculate nutrition dynamically if ingredients are available
     if (recipe.ingredients && Array.isArray(recipe.ingredients) && typeof calculateRecipeNutrition === 'function') {
         try {
-            recipe.nutrition = calculateRecipeNutrition(recipe.ingredients, recipe.servings || 1);
+            // Filter out section headers and empty strings for nutrition calculation
+            const nutritionIngredients = recipe.ingredients.filter(i => i && !i.endsWith(':') && i.trim() !== '');
+            console.log('Nutrition calculation ingredients:', nutritionIngredients);
+            recipe.nutrition = calculateRecipeNutrition(nutritionIngredients, recipe.servings || 1);
+            console.log('Nutrition calculation result:', recipe.nutrition);
             console.log('Calculated nutrition:', recipe.nutrition);
         } catch (error) {
             console.warn('Failed to calculate nutrition:', error);
@@ -900,9 +904,9 @@ function groupInstructions(instructions) {
 // Create calorie pie chart showing macro breakdown
 function createCaloriePieChart(calories, nutrition) {
     // Modernized, larger SVG donut chart
-    const carbsValue = parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, ''));
-    const proteinValue = parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, ''));
-    const fatValue = parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, ''));
+    const carbsValue = nutrition.carbs !== undefined ? parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, '')) : 0;
+    const proteinValue = nutrition.protein !== undefined ? parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, '')) : 0;
+    const fatValue = nutrition.fat !== undefined ? parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, '')) : 0;
     const servings = nutrition.servings && nutrition.servings > 0 ? nutrition.servings : 1;
     const caloriesPerServing = Math.round(calories);
     const carbsCals = carbsValue * 4;
@@ -962,11 +966,11 @@ function createCaloriePieChart(calories, nutrition) {
 // Create detailed macro breakdown with subcategories
 function createMacroBreakdown(nutrition) {
     // Calculate calories from each macro
-    const carbsValue = parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, ''));
-    const proteinValue = parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, ''));
-    const fatValue = parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, ''));
-    const sugarValue = parseFloat(nutrition.sugar.toString().replace(/[^\d.]/g, ''));
-    const fiberValue = parseFloat(nutrition.fiber.toString().replace(/[^\d.]/g, ''));
+    const carbsValue = nutrition.carbs !== undefined ? parseFloat(nutrition.carbs.toString().replace(/[^\d.]/g, '')) : 0;
+    const proteinValue = nutrition.protein !== undefined ? parseFloat(nutrition.protein.toString().replace(/[^\d.]/g, '')) : 0;
+    const fatValue = nutrition.fat !== undefined ? parseFloat(nutrition.fat.toString().replace(/[^\d.]/g, '')) : 0;
+    const sugarValue = nutrition.sugar !== undefined ? parseFloat(nutrition.sugar.toString().replace(/[^\d.]/g, '')) : 0;
+    const fiberValue = nutrition.fiber !== undefined ? parseFloat(nutrition.fiber.toString().replace(/[^\d.]/g, '')) : 0;
     
     const carbsCals = carbsValue * 4;
     const proteinCals = proteinValue * 4;

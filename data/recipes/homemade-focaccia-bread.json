@@ -8,7 +8,7 @@
     "category": "Bread",
     "youtubeId": "UI7KidsTbLI",
     "tags": ["bread", "italian", "no-knead", "high-hydration", "cold-fermentation", "olive oil", "rosemary", "artisan", "toppings"],
-    "servings": "1 loaf (8 slices)",
+    "servings": 8,
     "prepTime": "5 mins active",
     "restTime": "1-48 hours cold rise + 2-4 hours final rise",
     "cookTime": "25-30 mins",
@@ -94,13 +94,5 @@
         "Perfect salt ratio: Use 2% of flour weight in salt (5g for 256g flour). Start with slightly less if you're particularly salt-sensitive, keeping in mind that you'll be adding lovely flaky salt on top as well.",
         "Topping creativity guide: Start simple with just olive oil and salt for classic perfection. Add fresh rosemary for aromatic bliss, halved cherry tomatoes for bursts of sweetness, or pitted olives for Mediterranean flair. Thinly sliced red onions add wonderful sharpness, while garlic brings aromatic depth. Sun-dried tomatoes and pine nuts create gourmet elegance, and post-baking additions like crumbled feta or goat cheese add creamy richness.",
         "Topping application secrets: Always coat fresh toppings lightly with olive oil to prevent burning and ensure even cooking. Add delicate herbs and soft cheeses after baking to preserve their fresh flavors and prevent overcooking."
-    ],
-    "nutrition": {
-        "calories": 150,
-        "fat": "3g",
-        "carbs": "27g",
-        "protein": "4g",
-        "fiber": "1g",
-        "sodium": "295mg"
-    }
+    ]
 }

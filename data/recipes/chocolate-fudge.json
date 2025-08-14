@@ -62,15 +62,7 @@
         "KITCHEN NOVICE FRIENDLY: This foolproof recipe promises perfectly creamy fudge with hassle-free preparation that even complete beginners can master with confidence.",
         "PAN SIZE FLEXIBILITY: Use any similar-sized small pan for this recipe - a 15×10 cm rectangular dish provides the ideal thickness for cutting into perfectly proportioned squares."
     ],
-    "nutrition": {
-        "calories": 198,
-        "fat": "10g",
-        "carbs": "24g",
-        "protein": "3g",
-        "sugar": "21g",
-        "fiber": "2g",
-        "sodium": "100mg"
-    },
+    
     "lastUpdated": "2025-08-12",
     "version": "3.0"
 }
