@@ -1,4 +1,4 @@
-/* Nutrition section styles */
+/* ---------------- Nutrition Section ---------------- */
 .nutrition-section {
     background: #f8f9fa;
     border: 1px solid #e9ecef;
@@ -8,14 +8,15 @@
     color: var(--text-dark);
 }
 
+/* Section title */
 .nutrition-section .section-title {
-    color: var(--text-dark);
-    margin-bottom: 1.2rem;
-    font-weight: 500;
-    font-size: 1.2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-dark);
 }
 
 .nutrition-section .section-title i {
@@ -23,18 +24,20 @@
     font-size: 1rem;
 }
 
+/* ---------------- Nutrition Content ---------------- */
 .nutrition-content {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
+/* ---------------- Overview ---------------- */
 .nutrition-overview {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    background: white;
+    background: #fff;
     border-radius: 8px;
     border: 1px solid #e9ecef;
 }
@@ -45,15 +48,13 @@
     gap: 2rem;
 }
 
-.pie-chart-container {
-    position: relative;
+.pie-chart-container,
+.calorie-pie {
     width: 120px;
     height: 120px;
 }
 
 .calorie-pie {
-    width: 120px;
-    height: 120px;
     transform: rotate(-90deg);
 }
 
@@ -68,16 +69,16 @@
 .calorie-number {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--text-dark);
     line-height: 1;
 }
 
 .calorie-unit {
     font-size: 0.9rem;
-    color: var(--text-light);
     font-weight: 500;
+    color: var(--text-light);
 }
 
+/* Pie legend */
 .pie-legend {
     display: flex;
     flex-direction: column;
@@ -110,19 +111,21 @@
     margin-left: auto;
 }
 
+/* Serving count */
 .serving-count {
-    font-size: 0.9rem;
-    color: var(--text-light);
     display: flex;
     align-items: center;
     gap: 0.3rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
 }
 
 .serving-count i {
-    color: #667eea;
     font-size: 0.8rem;
+    color: #667eea;
 }
 
+/* ---------------- Macro Breakdown ---------------- */
 .macro-breakdown {
     margin-top: 1.5rem;
 }
@@ -142,8 +145,7 @@
 }
 
 .breakdown-item.main-item {
-    margin-top: 0.6rem;
-    margin-bottom: 0.15rem;
+    margin: 0.6rem 0 0.15rem;
 }
 
 .breakdown-item.sub-item {
@@ -151,6 +153,7 @@
     margin-bottom: 0.05rem;
 }
 
+/* Item line */
 .item-line {
     display: flex;
     align-items: center;
@@ -160,23 +163,27 @@
     white-space: nowrap;
 }
 
-.item-icon {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    flex-shrink: 0;
+.item-icon,
+.macro-icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.item-icon {
+    width: 16px;
+    height: 16px;
     font-size: 10px;
 }
 
 .macro-icon {
-    background: none;
-    border-radius: 0;
-    font-size: 12px;
     width: 14px;
     height: 14px;
+    font-size: 12px;
+    background: none;
+    border-radius: 0;
 }
 
 .item-name {
@@ -205,27 +212,21 @@
     color: var(--text-light);
 }
 
+/* Progress bars */
 .progress-bar {
     flex: 1;
     height: 8px;
-    background-color: #e9ecef;
     border-radius: 4px;
+    background-color: #e9ecef;
     overflow: hidden;
     margin: 0 0.6rem;
     position: relative;
 }
 
-.item-percent {
-    color: #bcc0c4;
-    font-weight: 400;
-    font-size: 0.6rem;
-    margin-left: auto;
-}
-
 .line-graph {
     height: 3px;
-    background-color: #bcc0c4;
     border-radius: 2px;
+    background-color: #bcc0c4;
     overflow: hidden;
     margin-left: 1rem;
 }
@@ -240,14 +241,17 @@
     transition: width 0.3s ease;
 }
 
-.macros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
+.item-percent {
+    color: #bcc0c4;
+    font-size: 0.6rem;
+    font-weight: 400;
+    margin-left: auto;
 }
 
+/* ---------------- Macros Grid ---------------- */
+
 .macro-item {
-    background: white;
+    background: #fff;
     border: 1px solid #e9ecef;
     border-radius: 8px;
     padding: 1rem;
@@ -261,6 +265,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Macro circle */
 .macro-circle {
     width: 50px;
     height: 50px;
@@ -290,29 +295,13 @@
     transition: stroke-dasharray 0.5s ease;
 }
 
-.macro-circle.protein .progress-circle {
-    stroke: #ff6b6b;
-}
-
-.macro-circle.carbs .progress-circle {
-    stroke: #ffd93d;
-}
-
-.macro-circle.fat .progress-circle {
-    stroke: #4ecdc4;
-}
-
-.macro-circle.sugar .progress-circle {
-    stroke: #ff8a9b;
-}
-
-.macro-circle.fiber .progress-circle {
-    stroke: #90ee90;
-}
-
-.macro-circle.sodium .progress-circle {
-    stroke: #87ceeb;
-}
+/* Macro stroke colors */
+.macro-circle.protein .progress-circle { stroke: #ff6b6b; }
+.macro-circle.carbs .progress-circle { stroke: #ffd93d; }
+.macro-circle.fat .progress-circle { stroke: #4ecdc4; }
+.macro-circle.sugar .progress-circle { stroke: #ff8a9b; }
+.macro-circle.fiber .progress-circle { stroke: #90ee90; }
+.macro-circle.sodium .progress-circle { stroke: #87ceeb; }
 
 .macro-percentage {
     position: absolute;
@@ -333,59 +322,6 @@
 
 .macro-label {
     font-size: 0.8rem;
-    color: var(--text-light);
     font-weight: 500;
-}
-
-/* Mobile Responsive for Nutrition */
-@media (max-width: 768px) {
-    .nutrition-section {
-        padding: 1.2rem;
-        margin: 1.5rem 0;
-    }
-    
-    .nutrition-overview {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-        padding: 1.2rem;
-    }
-    
-    .calorie-pie-chart {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .pie-chart-container {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .calorie-pie {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .calorie-number {
-        font-size: 1.5rem;
-    }
-    
-    .pie-legend {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
-    }
-    
-    .pie-legend-item {
-        font-size: 0.8rem;
-    }
-    
-    .macro-breakdown {
-        margin-top: 1rem;
-    }
-    
-    .breakdown-section {
-        padding: 0.6rem;
-    }
+    color: var(--text-light);
 }

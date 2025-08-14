@@ -26,106 +26,62 @@
 
 /* Navigation & Logo Layout Styles */
 .logo-keys {
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 600;
+	font-family: 'Courier New', monospace;
+	background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	font-weight: 600;
 }
 
 .logo i {
-    color: var(--accent-color);
-    font-size: 1.5rem;
+	color: var(--accent-color);
+	font-size: 1.5rem;
 }
 
 .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+	display: flex;
+	list-style: none;
+	gap: 2rem;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: var(--transition);
-    position: relative;
+	text-decoration: none;
+	color: var(--text-dark);
+	font-weight: 500;
+	transition: var(--transition);
+	position: relative;
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-color);
-    transition: var(--transition);
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background: var(--primary-color);
+	transition: var(--transition);
 }
 
 .nav-link:hover::after {
-    width: 100%;
+	width: 100%;
 }
 
 .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
+	display: none;
+	flex-direction: column;
+	cursor: pointer;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
-    background: var(--text-dark);
-    margin: 3px 0;
-    transition: var(--transition);
-}
-
-/* Layout styles: grid, flex, containers */
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: var(--white);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: var(--shadow);
-        padding: 2rem 0;
-    }
-    
-    .nav-menu.active {
-        left: 0;
-    }
-    
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }   
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
+	width: 25px;
+	height: 3px;
+	background: var(--text-dark);
+	margin: 3px 0;
+	transition: var(--transition);
 }

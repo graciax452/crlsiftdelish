@@ -9,8 +9,12 @@
 	--white: #ffffff;
 	--shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	--shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
-	--border-radius: 8px;
+	--border-radius: 10px;
 	--transition: all 0.3s ease;
+
+	/* Unified page gutters */
+	--page-padding-mobile: 12px;
+	--page-padding-desktop: 32px;
 }
 
 /* Reset and base styles */
@@ -26,4 +30,10 @@ body {
 	color: var(--text-dark);
 	overflow-x: hidden;
 }
-/* Base styles: resets, variables, typography */
+
+/* Base container for all main sections */
+.container {
+	padding-inline: var(--page-padding-desktop);
+	max-width: 1200px;
+	margin-inline: auto;
+}

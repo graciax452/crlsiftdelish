@@ -2,8 +2,8 @@
 .tips-notes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 /* Pro Tips Section Styling */
@@ -137,62 +137,3 @@
     font-size: 0.95rem;
     font-weight: 500;
 }
-/* Responsive Pro Tips and Recipe Notes */
-@media (max-width: 768px) {
-    .tips-notes-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    .pro-tips-section,
-    .recipe-notes-section {
-        margin-top: 0;
-        padding: 1.5rem;
-    }
-    .pro-tip-item,
-    .recipe-note-item {
-        padding: 1rem;
-        gap: 0.8rem;
-    }
-    .pro-tip-icon,
-    .note-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 0.8rem;
-    }
-    .pro-tip-text,
-    .note-text {
-        font-size: 0.9rem;
-    }
-}
-
-
-/* Mobile full-width fixes for tips, notes, and footer */
-    @media (max-width: 480px) {
-        .tips-notes-grid {
-            display: block !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            padding-left: 0.5rem !important;
-            padding-right: 0.5rem !important;
-            box-sizing: border-box !important;
-        }
-
-        .pro-tips-section,
-        .recipe-notes-section {
-            width: 100vw !important;
-            max-width: 100vw !important;
-            position: relative !important;
-            left: 0 !important;
-            transform: none !important;
-            margin: 0 !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            background: none !important;
-            box-sizing: border-box !important;
-            margin-bottom: 2.5rem !important;
-        }              
-    }
