@@ -143,6 +143,14 @@
         background-color: #fcfcfc; /* lighter grey */
     }
 
+    /* Back button apply fixed position on small screens */
+    .back-button {
+        position: fixed;
+        bottom: 1rem; 
+        left: 1rem;
+        top: auto;             
+    }
+
 }
 
 /* Extra small screens */
@@ -161,3 +169,4 @@
         display: none;
     }
 }
+
