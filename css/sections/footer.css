@@ -1,0 +1,53 @@
+/* Footer */
+.footer {
+    background: var(--text-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer i {
+    color: var(--primary-color);
+    margin: 0 5px;
+}
+
+@media (max-width: 600px) {
+  html, body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main, .recipe-detail {
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex-shrink: 0;
+    position: static !important;
+    width: 100%;
+  }
+  /* If you use a main content wrapper: */
+  .main-content {
+    flex: 1 0 auto;
+  }
+  .footer {
+    position: static !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .footer p {
+    padding: 0 1rem;
+    word-break: break-word;
+  }
+  .footer i {
+    margin: 0 3px;
+    font-size: 1.1em;
+  }
+}
