@@ -1,0 +1,29 @@
+/* CSS Variables */
+:root {
+	--primary-color: #ff6b6b;
+	--secondary-color: #4ecdc4;
+	--accent-color: #45b7d1;
+	--text-dark: #2c3e50;
+	--text-light: #7f8c8d;
+	--bg-light: #f8f9fa;
+	--white: #ffffff;
+	--shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	--shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+	--border-radius: 8px;
+	--transition: all 0.3s ease;
+}
+
+/* Reset and base styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poppins', sans-serif;
+	line-height: 1.6;
+	color: var(--text-dark);
+	overflow-x: hidden;
+}
+/* Base styles: resets, variables, typography */
