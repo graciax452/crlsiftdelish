@@ -1,1 +1,294 @@
 /* Home page styles */
+
+/* Hero Section */
+.hero {
+    /* Fallback gradient if no hero image */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Multi-layer background: gradient overlay + grid pattern + hero image */
+    background-image: 
+        linear-gradient(135deg, rgba(102, 126, 234, 0.5) 0%, rgba(118, 75, 162, 0.5) 100%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>'),
+        url('../images/hero-bg.jpg');
+    
+    /* Background image settings */
+    background-size: cover, auto, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat, repeat, no-repeat;
+    background-attachment: fixed, fixed, fixed;
+    
+    color: var(--white);
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 107, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(78, 205, 196, 0.2) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease 0.2s both;
+}
+
+.badge-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(45deg, #fff, #e0e7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease 0.4s both;
+}
+
+.hero-taglines {
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease 0.6s both;
+}
+
+.tagline {
+
+    margin: 0.5rem 0;
+
+/* Fix mobile alignment for recipe-detail */
+@media (max-width: 600px) {
+    .recipe-detail {
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+        .recipe-container,
+        .ingredients-section,
+        .instructions-section,
+        .nutrition-section {
+            width: 94vw;
+            max-width: 94vw;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.5rem;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .recipe-header,
+        .recipe-content {
+            grid-template-columns: 1fr !important;
+            gap: 1rem !important;
+        }
+}
+    font-family: 'Courier New', monospace;
+}
+
+.tagline.primary {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.tagline.secondary {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.8s both;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    animation: fadeInUp 1s ease 1s both;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button.primary {
+    background: linear-gradient(45deg, var(--primary-color), #ff8a80);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button.primary:hover {
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
+.cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    animation: fadeInUp 1s ease 1.2s both;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffd700;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 0 60px;
+        min-height: 70vh;
+    }
+    
+    .hero-title {
+        font-size: 2.4rem;
+    }
+    
+    .tagline.primary {
+        font-size: 1.1rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        gap: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    } 
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+     .hero {
+        padding: 120px 0 80px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
